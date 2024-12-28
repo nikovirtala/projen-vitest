@@ -104,6 +104,10 @@
       "type": "build"
     },
     {
+      "name": "vitest",
+      "type": "bundled"
+    },
+    {
       "name": "constructs",
       "type": "peer"
     },

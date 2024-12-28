@@ -1,6 +1,6 @@
 {
   "name": "@nikovirtala/projen-vitest",
-  "description": "",
+  "description": "Vitest component for projen Node.js projects",
   "repository": {
     "type": "git",
     "url": "https://github.com/nikovirtala/projen-vitest.git"
@@ -64,8 +64,12 @@
     "projen": "^0.91.4"
   },
   "dependencies": {
-    "projen": "^0.91.4"
+    "projen": "^0.91.4",
+    "vitest": "^2.1.8"
   },
+  "bundledDependencies": [
+    "vitest"
+  ],
   "pnpm": {},
   "engines": {
     "node": ">= 22.12.0"

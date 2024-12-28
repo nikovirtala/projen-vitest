@@ -5,9 +5,10 @@ const nodeVersion = "22.12.0";
 const project = new cdk.JsiiProject({
     author: "Niko Virtala",
     authorAddress: "niko.virtala@hey.com",
+    bundledDeps: ["vitest"],
     defaultReleaseBranch: "main",
     deps: ["projen"],
-    description: "",
+    description: "Vitest component for projen Node.js projects",
     dependabot: false,
     depsUpgradeOptions: {
         workflowOptions: {
@@ -43,6 +44,8 @@ const project = new cdk.JsiiProject({
     repositoryUrl: "https://github.com/nikovirtala/projen-vitest.git",
     typescriptVersion: "5.7.2",
 });
+
+project.npmrc.addConfig("node-linker", "hoisted");
 
 project.vscode?.extensions.addRecommendations("dbaeumer.vscode-eslint", "esbenp.prettier-vscode");
 
