@@ -342,6 +342,7 @@ export class Vitest extends Component {
         if (!testWatch) {
             this.project.addTask("test:watch", {
                 exec: "vitest watch",
+                receiveArgs: true,
             });
         }
     }
