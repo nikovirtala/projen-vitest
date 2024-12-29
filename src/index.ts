@@ -311,25 +311,18 @@ export class Vitest extends Component {
     private renderTestOptions(): Array<string> {
         const lines: Array<string> = [];
 
-        if (this.include.size > 0) {
-            lines.push(`    include: ${JSON.stringify(Array.from(this.include))},`);
-        }
-
-        if (this.exclude.size > 0) {
-            lines.push(`    exclude: ${JSON.stringify(Array.from(this.exclude))},`);
-        }
-
-        lines.push(`    isolate: ${this.isolate},`);
-        lines.push(`    pool: "${this.pool}", `);
-        lines.push(`    environment: "${this.environment}",`);
-        lines.push(`    globals: ${this.globals},`);
-
         lines.push("    coverage: {");
         lines.push(`      enabled: ${this.coverageEnabled},`);
         lines.push(`      provider: "${this.coverageProvider}",`);
         lines.push(`      reporter: ${JSON.stringify(this.coverageReporters)},`);
         lines.push(`      reportsDirectory: "${this.coverageDirectory}",`);
         lines.push("    },");
+        lines.push(`    environment: "${this.environment}",`);
+        lines.push(`    exclude: ${JSON.stringify(Array.from(this.exclude))},`);
+        lines.push(`    globals: ${this.globals},`);
+        lines.push(`    include: ${JSON.stringify(Array.from(this.include))},`);
+        lines.push(`    isolate: ${this.isolate},`);
+        lines.push(`    pool: "${this.pool}", `);
 
         return lines;
     }
