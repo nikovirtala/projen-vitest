@@ -1,6 +1,6 @@
 import { NodeProject } from "projen/lib/javascript";
 import { synthSnapshot } from "projen/lib/util/synth";
-import { Vitest, VitestEnvironment, CoverageProvider, CoverageReporter } from "../src";
+import { Vitest, VitestEnvironment, CoverageProvider, CoverageReporter, Pool } from "../src";
 
 describe("jest", () => {
     test("throws when jest is enabled", () => {
@@ -84,6 +84,7 @@ describe("vitest", () => {
             config: {
                 environment: VitestEnvironment.HAPPY_DOM,
                 isolate: false,
+                pool: Pool.THREADS,
                 globals: false,
                 coverageProvider: CoverageProvider.ISTANBUL,
                 coverageReporters: [CoverageReporter.HTML],
@@ -97,6 +98,7 @@ describe("vitest", () => {
         expect(snapshot["custom.vitest.config.ts"]).toBeDefined();
         expect(snapshot["custom.vitest.config.ts"]).toContain('environment: "happy-dom"');
         expect(snapshot["custom.vitest.config.ts"]).toContain("isolate: false");
+        expect(snapshot["custom.vitest.config.ts"]).toContain('pool: "threads"');
         expect(snapshot["custom.vitest.config.ts"]).toContain("globals: false");
         expect(snapshot["custom.vitest.config.ts"]).toContain('provider: "istanbul"');
         expect(snapshot["custom.vitest.config.ts"]).toContain('reporter: ["html"]');

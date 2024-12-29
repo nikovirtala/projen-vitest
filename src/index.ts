@@ -11,6 +11,39 @@ export enum VitestEnvironment {
     NODE = "node",
 }
 
+export enum Pool {
+    /**
+     * Run tests in `node:child_process` using [`fork()`](https://nodejs.org/api/child_process.html#child_processforkmodulepath-args-options)
+     *
+     * Test isolation (when enabled) is done by spawning a new child process for each test file.
+     */
+    FORKS = "forks",
+
+    /**
+     * Run tests in `node:worker_threads`.
+     *
+     * Test isolation (when enabled) is done by spawning a new thread for each test file.
+     */
+    THREADS = "threads",
+
+    /**
+     * Run tests in isolated `node:vm`.
+     *
+     * Test files are run parallel using `node:child_process` [`fork()`](https://nodejs.org/api/child_process.html#child_processforkmodulepath-args-options)
+     *
+     * This makes tests run faster, but VM module is unstable. Your tests might leak memory.
+     */
+    VMFORKS = "vmforks",
+
+    /**
+     * Run tests in isolated `node:vm`.
+     * Test files are run parallel using `node:worker_threads`.
+     *
+     * This makes tests run faster, but VM module is unstable. Your tests might leak memory.
+     */
+    VMTHREADS = "vmthreads",
+}
+
 export enum CoverageProvider {
     ISTANBUL = "istanbul",
     V8 = "v8",
@@ -60,6 +93,13 @@ export interface VitestConfigOptions {
      * @default true
      */
     readonly isolate?: boolean;
+
+    /**
+     * Pool used to run tests in. https://vitest.dev/config/#pool
+     *
+     * @default "forks"
+     */
+    readonly pool?: Pool;
 
     /**
      * Register apis globally. If you prefer to use the APIs globally like Jest, set to `true`.
@@ -122,6 +162,7 @@ export class Vitest extends Component {
     private readonly include: Set<string>;
     private readonly exclude: Set<string>;
     private readonly isolate: boolean;
+    private readonly pool: Pool;
     private environment: string;
     private globals: boolean;
     private coverageProvider: string;
@@ -139,6 +180,7 @@ export class Vitest extends Component {
         this.include = new Set(options.config?.include ?? [...configDefaults.include]);
         this.exclude = new Set(options.config?.exclude ?? [...configDefaults.exclude]);
         this.isolate = options.config?.isolate ?? true;
+        this.pool = options.config?.pool ?? Pool.FORKS;
         this.environment = options.config?.environment ?? VitestEnvironment.NODE;
         this.globals = options.config?.globals ?? false;
         this.coverageProvider = options.config?.coverageProvider ?? CoverageProvider.V8;
@@ -222,6 +264,7 @@ export class Vitest extends Component {
         }
 
         lines.push(`    isolate: ${this.isolate},`);
+        lines.push(`    pool: "${this.pool}", `);
         lines.push(`    environment: "${this.environment}",`);
         lines.push(`    globals: ${this.globals},`);
 

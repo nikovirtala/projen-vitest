@@ -273,6 +273,7 @@ const vitestConfigOptions: VitestConfigOptions = { ... }
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.globals">globals</a></code> | <code>boolean</code> | Register apis globally. |
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.include">include</a></code> | <code>string[]</code> | A list of glob patterns that match your test files. |
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.isolate">isolate</a></code> | <code>boolean</code> | Run tests in an isolated environment. This option has no effect on vmThreads pool. |
+| <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.pool">pool</a></code> | <code><a href="#@nikovirtala/projen-vitest.Pool">Pool</a></code> | Pool used to run tests in. |
 
 ---
 
@@ -397,6 +398,21 @@ https://vitest.dev/config/#isolate
 
 ---
 
+##### `pool`<sup>Optional</sup> <a name="pool" id="@nikovirtala/projen-vitest.VitestConfigOptions.property.pool"></a>
+
+```typescript
+public readonly pool: Pool;
+```
+
+- *Type:* <a href="#@nikovirtala/projen-vitest.Pool">Pool</a>
+- *Default:* "forks"
+
+Pool used to run tests in.
+
+https://vitest.dev/config/#pool
+
+---
+
 ### VitestOptions <a name="VitestOptions" id="@nikovirtala/projen-vitest.VitestOptions"></a>
 
 #### Initializer <a name="Initializer" id="@nikovirtala/projen-vitest.VitestOptions.Initializer"></a>
@@ -515,6 +531,57 @@ Vitest version.
 
 
 ##### `TEXT` <a name="TEXT" id="@nikovirtala/projen-vitest.CoverageReporter.TEXT"></a>
+
+---
+
+
+### Pool <a name="Pool" id="@nikovirtala/projen-vitest.Pool"></a>
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@nikovirtala/projen-vitest.Pool.FORKS">FORKS</a></code> | Run tests in `node:child_process` using [`fork()`](https://nodejs.org/api/child_process.html#child_processforkmodulepath-args-options). |
+| <code><a href="#@nikovirtala/projen-vitest.Pool.THREADS">THREADS</a></code> | Run tests in `node:worker_threads`. |
+| <code><a href="#@nikovirtala/projen-vitest.Pool.VMFORKS">VMFORKS</a></code> | Run tests in isolated `node:vm`. |
+| <code><a href="#@nikovirtala/projen-vitest.Pool.VMTHREADS">VMTHREADS</a></code> | Run tests in isolated `node:vm`. Test files are run parallel using `node:worker_threads`. |
+
+---
+
+##### `FORKS` <a name="FORKS" id="@nikovirtala/projen-vitest.Pool.FORKS"></a>
+
+Run tests in `node:child_process` using [`fork()`](https://nodejs.org/api/child_process.html#child_processforkmodulepath-args-options).
+
+Test isolation (when enabled) is done by spawning a new child process for each test file.
+
+---
+
+
+##### `THREADS` <a name="THREADS" id="@nikovirtala/projen-vitest.Pool.THREADS"></a>
+
+Run tests in `node:worker_threads`.
+
+Test isolation (when enabled) is done by spawning a new thread for each test file.
+
+---
+
+
+##### `VMFORKS` <a name="VMFORKS" id="@nikovirtala/projen-vitest.Pool.VMFORKS"></a>
+
+Run tests in isolated `node:vm`.
+
+Test files are run parallel using `node:child_process` [`fork()`](https://nodejs.org/api/child_process.html#child_processforkmodulepath-args-options)
+
+This makes tests run faster, but VM module is unstable. Your tests might leak memory.
+
+---
+
+
+##### `VMTHREADS` <a name="VMTHREADS" id="@nikovirtala/projen-vitest.Pool.VMTHREADS"></a>
+
+Run tests in isolated `node:vm`. Test files are run parallel using `node:worker_threads`.
+
+This makes tests run faster, but VM module is unstable. Your tests might leak memory.
 
 ---
 
