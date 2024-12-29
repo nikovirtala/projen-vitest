@@ -270,7 +270,7 @@ const vitestConfigOptions: VitestConfigOptions = { ... }
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.coverageReporters">coverageReporters</a></code> | <code><a href="#@nikovirtala/projen-vitest.CoverageReporter">CoverageReporter</a>[]</code> | Coverage reporters. |
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.environment">environment</a></code> | <code><a href="#@nikovirtala/projen-vitest.VitestEnvironment">VitestEnvironment</a></code> | The environment that will be used for testing. |
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.exclude">exclude</a></code> | <code>string[]</code> | A list of glob patterns that should be excluded from your test files. |
-| <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.globals">globals</a></code> | <code>boolean</code> | Enable globals. |
+| <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.globals">globals</a></code> | <code>boolean</code> | Register apis globally. |
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.include">include</a></code> | <code>string[]</code> | A list of glob patterns that match your test files. |
 
 ---
@@ -355,10 +355,11 @@ public readonly globals: boolean;
 ```
 
 - *Type:* boolean
-- *Default:* true
+- *Default:* false
 
-Enable globals.
+Register apis globally.
 
+If you prefer to use the APIs globally like Jest, set to `true`.
 https://vitest.dev/config/#globals
 
 ---

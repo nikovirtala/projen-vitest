@@ -51,9 +51,10 @@ export interface VitestConfigOptions {
     readonly environment?: VitestEnvironment;
 
     /**
-     * Enable globals. https://vitest.dev/config/#globals
+     * Register apis globally. If you prefer to use the APIs globally like Jest, set to `true`.
+     * https://vitest.dev/config/#globals
      *
-     * @default true
+     * @default false
      */
     readonly globals?: boolean;
 
@@ -126,7 +127,7 @@ export class Vitest extends Component {
         this.include = new Set(options.config?.include ?? [...configDefaults.include]);
         this.exclude = new Set(options.config?.exclude ?? [...configDefaults.exclude]);
         this.environment = options.config?.environment ?? VitestEnvironment.NODE;
-        this.globals = options.config?.globals ?? true;
+        this.globals = options.config?.globals ?? false;
         this.coverageProvider = options.config?.coverageProvider ?? CoverageProvider.V8;
         this.coverageReporters = options.config?.coverageReporters ?? [CoverageReporter.TEXT, CoverageReporter.LCOV];
         this.coverageDirectory = options.config?.coverageDirectory ?? "coverage";
