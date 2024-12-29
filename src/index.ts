@@ -207,6 +207,13 @@ export interface VitestConfigOptions {
      * @default "tsconfig.dev.json"
      */
     readonly typecheckTsconfig?: string;
+
+    /**
+     * Vitest will not fail, if no tests will be found. https://vitest.dev/config/#passwithnotests
+     *
+     * @default true
+     */
+    readonly passWithNoTests?: boolean;
 }
 
 export interface VitestOptions {
@@ -245,6 +252,7 @@ export class Vitest extends Component {
     private readonly typecheckEnabled: boolean;
     private readonly typecheckChecker: string;
     private readonly typecheckTsconfig: string;
+    private readonly passWithNoTests: boolean;
     private environment: string;
     private globals: boolean;
     private coverageProvider: CoverageProvider;
@@ -268,6 +276,7 @@ export class Vitest extends Component {
         this.typecheckEnabled = options.config?.typecheckEnabled ?? true;
         this.typecheckChecker = options.config?.typecheckChecker ?? "tsc --noEmit";
         this.typecheckTsconfig = options.config?.typecheckTsconfig ?? "tsconfig.dev.json";
+        this.passWithNoTests = options.config?.passWithNoTests ?? true;
         this.environment = options.config?.environment ?? Environment.NODE;
         this.globals = options.config?.globals ?? false;
         this.coverageProvider = options.config?.coverageProvider ?? CoverageProvider.V8;
@@ -372,6 +381,7 @@ export class Vitest extends Component {
         lines.push(`    globals: ${this.globals},`);
         lines.push(`    include: ${JSON.stringify(Array.from(this.include))},`);
         lines.push(`    isolate: ${this.isolate},`);
+        lines.push(`    passWithNoTests: ${this.passWithNoTests},`);
         lines.push(`    pool: "${this.pool}",`);
         lines.push("    typecheck: {");
         lines.push(`      checker: "${this.typecheckChecker}",`);

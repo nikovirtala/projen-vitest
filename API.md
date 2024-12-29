@@ -274,6 +274,7 @@ const vitestConfigOptions: VitestConfigOptions = { ... }
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.globals">globals</a></code> | <code>boolean</code> | Register apis globally. |
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.include">include</a></code> | <code>string[]</code> | A list of glob patterns that match your test files. |
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.isolate">isolate</a></code> | <code>boolean</code> | Run tests in an isolated environment. This option has no effect on vmThreads pool. |
+| <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.passWithNoTests">passWithNoTests</a></code> | <code>boolean</code> | Vitest will not fail, if no tests will be found. |
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.pool">pool</a></code> | <code><a href="#@nikovirtala/projen-vitest.Pool">Pool</a></code> | Pool used to run tests in. |
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.typecheckChecker">typecheckChecker</a></code> | <code>string</code> | Tool to use for type checking. Checker should implement the same output format as `tsc`. |
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.typecheckEnabled">typecheckEnabled</a></code> | <code>boolean</code> | Enable typechecking alongside your regular tests. |
@@ -414,6 +415,21 @@ Run tests in an isolated environment. This option has no effect on vmThreads poo
 Disabling this option might improve performance if your code doesn't rely on side effects.
 
 https://vitest.dev/config/#isolate
+
+---
+
+##### `passWithNoTests`<sup>Optional</sup> <a name="passWithNoTests" id="@nikovirtala/projen-vitest.VitestConfigOptions.property.passWithNoTests"></a>
+
+```typescript
+public readonly passWithNoTests: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Vitest will not fail, if no tests will be found.
+
+https://vitest.dev/config/#passwithnotests
 
 ---
 

@@ -107,6 +107,7 @@ describe("vitest", () => {
                 typecheckEnabled: false,
                 typecheckChecker: "tsc",
                 typecheckTsconfig: "tsconfig.custom.json",
+                passWithNoTests: false,
             },
         });
 
@@ -114,6 +115,7 @@ describe("vitest", () => {
         expect(snapshot["custom.vitest.config.ts"]).toBeDefined();
         expect(snapshot["custom.vitest.config.ts"]).toContain('environment: "happy-dom"');
         expect(snapshot["custom.vitest.config.ts"]).toContain("isolate: false");
+        expect(snapshot["custom.vitest.config.ts"]).toContain("passWithNoTests: false");
         expect(snapshot["custom.vitest.config.ts"]).toContain('pool: "threads"');
         expect(snapshot["custom.vitest.config.ts"]).toContain("globals: false");
         expect(snapshot["custom.vitest.config.ts"]).toContain("enabled: false");
