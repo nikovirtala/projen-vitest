@@ -266,6 +266,7 @@ const vitestConfigOptions: VitestConfigOptions = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.coverageDirectory">coverageDirectory</a></code> | <code>string</code> | Coverage output directory. |
+| <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.coverageEnabled">coverageEnabled</a></code> | <code>boolean</code> | Coverage enabled. |
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.coverageProvider">coverageProvider</a></code> | <code><a href="#@nikovirtala/projen-vitest.CoverageProvider">CoverageProvider</a></code> | Coverage provider type. |
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.coverageReporters">coverageReporters</a></code> | <code><a href="#@nikovirtala/projen-vitest.CoverageReporter">CoverageReporter</a>[]</code> | Coverage reporters. |
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.environment">environment</a></code> | <code><a href="#@nikovirtala/projen-vitest.Environment">Environment</a></code> | The environment that will be used for testing. |
@@ -287,6 +288,21 @@ public readonly coverageDirectory: string;
 - *Default:* "coverage"
 
 Coverage output directory.
+
+---
+
+##### `coverageEnabled`<sup>Optional</sup> <a name="coverageEnabled" id="@nikovirtala/projen-vitest.VitestConfigOptions.property.coverageEnabled"></a>
+
+```typescript
+public readonly coverageEnabled: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Coverage enabled.
+
+https://vitest.dev/config/#coverage-enabled
 
 ---
 
@@ -481,17 +497,25 @@ Vitest version.
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@nikovirtala/projen-vitest.CoverageProvider.ISTANBUL">ISTANBUL</a></code> | *No description.* |
-| <code><a href="#@nikovirtala/projen-vitest.CoverageProvider.V8">V8</a></code> | *No description.* |
+| <code><a href="#@nikovirtala/projen-vitest.CoverageProvider.ISTANBUL">ISTANBUL</a></code> | Provide coverage report using istanbul. |
+| <code><a href="#@nikovirtala/projen-vitest.CoverageProvider.V8">V8</a></code> | Provide coverage reports using v8. |
 
 ---
 
 ##### `ISTANBUL` <a name="ISTANBUL" id="@nikovirtala/projen-vitest.CoverageProvider.ISTANBUL"></a>
 
+Provide coverage report using istanbul.
+
+https://istanbul.js.org
+
 ---
 
 
 ##### `V8` <a name="V8" id="@nikovirtala/projen-vitest.CoverageProvider.V8"></a>
+
+Provide coverage reports using v8.
+
+https://v8.dev/blog/javascript-code-coverage
 
 ---
 
@@ -502,35 +526,45 @@ Vitest version.
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@nikovirtala/projen-vitest.CoverageReporter.CLOVER">CLOVER</a></code> | *No description.* |
-| <code><a href="#@nikovirtala/projen-vitest.CoverageReporter.HTML">HTML</a></code> | *No description.* |
-| <code><a href="#@nikovirtala/projen-vitest.CoverageReporter.JSON">JSON</a></code> | *No description.* |
-| <code><a href="#@nikovirtala/projen-vitest.CoverageReporter.LCOV">LCOV</a></code> | *No description.* |
-| <code><a href="#@nikovirtala/projen-vitest.CoverageReporter.TEXT">TEXT</a></code> | *No description.* |
+| <code><a href="#@nikovirtala/projen-vitest.CoverageReporter.CLOVER">CLOVER</a></code> | Provides `clover` report. |
+| <code><a href="#@nikovirtala/projen-vitest.CoverageReporter.HTML">HTML</a></code> | Provides `HTML` report. |
+| <code><a href="#@nikovirtala/projen-vitest.CoverageReporter.JSON">JSON</a></code> | Provides `JSON` report. |
+| <code><a href="#@nikovirtala/projen-vitest.CoverageReporter.LCOV">LCOV</a></code> | Provides `LCOV` report. |
+| <code><a href="#@nikovirtala/projen-vitest.CoverageReporter.TEXT">TEXT</a></code> | Provides `text` report. |
 
 ---
 
 ##### `CLOVER` <a name="CLOVER" id="@nikovirtala/projen-vitest.CoverageReporter.CLOVER"></a>
+
+Provides `clover` report.
 
 ---
 
 
 ##### `HTML` <a name="HTML" id="@nikovirtala/projen-vitest.CoverageReporter.HTML"></a>
 
+Provides `HTML` report.
+
 ---
 
 
 ##### `JSON` <a name="JSON" id="@nikovirtala/projen-vitest.CoverageReporter.JSON"></a>
+
+Provides `JSON` report.
 
 ---
 
 
 ##### `LCOV` <a name="LCOV" id="@nikovirtala/projen-vitest.CoverageReporter.LCOV"></a>
 
+Provides `LCOV` report.
+
 ---
 
 
 ##### `TEXT` <a name="TEXT" id="@nikovirtala/projen-vitest.CoverageReporter.TEXT"></a>
+
+Provides `text` report.
 
 ---
 

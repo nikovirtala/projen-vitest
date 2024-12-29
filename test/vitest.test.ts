@@ -86,6 +86,7 @@ describe("vitest", () => {
                 isolate: false,
                 pool: Pool.THREADS,
                 globals: false,
+                coverageEnabled: false,
                 coverageProvider: CoverageProvider.ISTANBUL,
                 coverageReporters: [CoverageReporter.HTML],
                 coverageDirectory: "custom-coverage",
@@ -100,6 +101,7 @@ describe("vitest", () => {
         expect(snapshot["custom.vitest.config.ts"]).toContain("isolate: false");
         expect(snapshot["custom.vitest.config.ts"]).toContain('pool: "threads"');
         expect(snapshot["custom.vitest.config.ts"]).toContain("globals: false");
+        expect(snapshot["custom.vitest.config.ts"]).toContain("enabled: false");
         expect(snapshot["custom.vitest.config.ts"]).toContain('provider: "istanbul"');
         expect(snapshot["custom.vitest.config.ts"]).toContain('reporter: ["html"]');
         expect(snapshot["custom.vitest.config.ts"]).toContain('reportsDirectory: "custom-coverage"');

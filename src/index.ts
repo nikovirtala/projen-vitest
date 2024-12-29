@@ -66,15 +66,41 @@ export enum Pool {
 }
 
 export enum CoverageProvider {
+    /**
+     * Provide coverage report using istanbul. https://istanbul.js.org
+     */
     ISTANBUL = "istanbul",
+
+    /**
+     * Provide coverage reports using v8. https://v8.dev/blog/javascript-code-coverage
+     */
     V8 = "v8",
 }
 
 export enum CoverageReporter {
+    /**
+     * Provides `clover` report.
+     */
     CLOVER = "clover",
+
+    /**
+     * Provides `HTML` report.
+     */
     HTML = "html",
+
+    /**
+     * Provides `JSON` report.
+     */
     JSON = "json",
+
+    /**
+     * Provides `LCOV` report.
+     */
     LCOV = "lcov",
+
+    /**
+     * Provides `text` report.
+     */
     TEXT = "text",
 }
 
@@ -131,6 +157,13 @@ export interface VitestConfigOptions {
     readonly globals?: boolean;
 
     /**
+     * Coverage enabled. https://vitest.dev/config/#coverage-enabled
+     *
+     * @default true
+     */
+    readonly coverageEnabled?: boolean;
+
+    /**
      * Coverage provider type. https://vitest.dev/config/#coverage-provider
      *
      * @default "v8"
@@ -184,6 +217,7 @@ export class Vitest extends Component {
     private readonly exclude: Set<string>;
     private readonly isolate: boolean;
     private readonly pool: Pool;
+    private readonly coverageEnabled: boolean;
     private environment: string;
     private globals: boolean;
     private coverageProvider: string;
@@ -202,6 +236,7 @@ export class Vitest extends Component {
         this.exclude = new Set(options.config?.exclude ?? [...configDefaults.exclude]);
         this.isolate = options.config?.isolate ?? true;
         this.pool = options.config?.pool ?? Pool.FORKS;
+        this.coverageEnabled = options.config?.coverageEnabled ?? true;
         this.environment = options.config?.environment ?? Environment.NODE;
         this.globals = options.config?.globals ?? false;
         this.coverageProvider = options.config?.coverageProvider ?? CoverageProvider.V8;
@@ -290,6 +325,7 @@ export class Vitest extends Component {
         lines.push(`    globals: ${this.globals},`);
 
         lines.push("    coverage: {");
+        lines.push(`      enabled: ${this.coverageEnabled},`);
         lines.push(`      provider: "${this.coverageProvider}",`);
         lines.push(`      reporter: ${JSON.stringify(this.coverageReporters)},`);
         lines.push(`      reportsDirectory: "${this.coverageDirectory}",`);
