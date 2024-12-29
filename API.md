@@ -132,10 +132,10 @@ public configureCoverageReporters(reporters: CoverageReporter[]): void
 ##### `configureEnvironment` <a name="configureEnvironment" id="@nikovirtala/projen-vitest.Vitest.configureEnvironment"></a>
 
 ```typescript
-public configureEnvironment(env: Environment): void
+public configureEnvironment(environment: Environment): void
 ```
 
-###### `env`<sup>Required</sup> <a name="env" id="@nikovirtala/projen-vitest.Vitest.configureEnvironment.parameter.env"></a>
+###### `environment`<sup>Required</sup> <a name="environment" id="@nikovirtala/projen-vitest.Vitest.configureEnvironment.parameter.environment"></a>
 
 - *Type:* <a href="#@nikovirtala/projen-vitest.Environment">Environment</a>
 

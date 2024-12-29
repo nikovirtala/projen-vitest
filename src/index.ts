@@ -312,8 +312,8 @@ export class Vitest extends Component {
 
     // TODO: should we have public method for each configuration parameter or only allow config thru props?
 
-    public configureEnvironment(env: Environment): void {
-        this.environment = env;
+    public configureEnvironment(environment: Environment): void {
+        this.environment = environment;
         this.synthesizeConfig();
     }
 
