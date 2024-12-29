@@ -132,12 +132,12 @@ public configureCoverageReporters(reporters: CoverageReporter[]): void
 ##### `configureEnvironment` <a name="configureEnvironment" id="@nikovirtala/projen-vitest.Vitest.configureEnvironment"></a>
 
 ```typescript
-public configureEnvironment(env: VitestEnvironment): void
+public configureEnvironment(env: Environment): void
 ```
 
 ###### `env`<sup>Required</sup> <a name="env" id="@nikovirtala/projen-vitest.Vitest.configureEnvironment.parameter.env"></a>
 
-- *Type:* <a href="#@nikovirtala/projen-vitest.VitestEnvironment">VitestEnvironment</a>
+- *Type:* <a href="#@nikovirtala/projen-vitest.Environment">Environment</a>
 
 ---
 
@@ -268,7 +268,7 @@ const vitestConfigOptions: VitestConfigOptions = { ... }
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.coverageDirectory">coverageDirectory</a></code> | <code>string</code> | Coverage output directory. |
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.coverageProvider">coverageProvider</a></code> | <code><a href="#@nikovirtala/projen-vitest.CoverageProvider">CoverageProvider</a></code> | Coverage provider type. |
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.coverageReporters">coverageReporters</a></code> | <code><a href="#@nikovirtala/projen-vitest.CoverageReporter">CoverageReporter</a>[]</code> | Coverage reporters. |
-| <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.environment">environment</a></code> | <code><a href="#@nikovirtala/projen-vitest.VitestEnvironment">VitestEnvironment</a></code> | The environment that will be used for testing. |
+| <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.environment">environment</a></code> | <code><a href="#@nikovirtala/projen-vitest.Environment">Environment</a></code> | The environment that will be used for testing. |
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.exclude">exclude</a></code> | <code>string[]</code> | A list of glob patterns that should be excluded from your test files. |
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.globals">globals</a></code> | <code>boolean</code> | Register apis globally. |
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.include">include</a></code> | <code>string[]</code> | A list of glob patterns that match your test files. |
@@ -323,10 +323,10 @@ https://vitest.dev/config/#coverage-reporter
 ##### `environment`<sup>Optional</sup> <a name="environment" id="@nikovirtala/projen-vitest.VitestConfigOptions.property.environment"></a>
 
 ```typescript
-public readonly environment: VitestEnvironment;
+public readonly environment: Environment;
 ```
 
-- *Type:* <a href="#@nikovirtala/projen-vitest.VitestEnvironment">VitestEnvironment</a>
+- *Type:* <a href="#@nikovirtala/projen-vitest.Environment">Environment</a>
 - *Default:* "node"
 
 The environment that will be used for testing.
@@ -535,6 +535,53 @@ Vitest version.
 ---
 
 
+### Environment <a name="Environment" id="@nikovirtala/projen-vitest.Environment"></a>
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@nikovirtala/projen-vitest.Environment.EDGE_RUNTIME">EDGE_RUNTIME</a></code> | Run tests in Vercel's Edge Runtime VM. |
+| <code><a href="#@nikovirtala/projen-vitest.Environment.HAPPY_DOM">HAPPY_DOM</a></code> | Run tests in `happy-dom` environment. |
+| <code><a href="#@nikovirtala/projen-vitest.Environment.JSDOM">JSDOM</a></code> | Run tests in `jsdom` environment. |
+| <code><a href="#@nikovirtala/projen-vitest.Environment.NODE">NODE</a></code> | Run tests in a Node.js environment. |
+
+---
+
+##### `EDGE_RUNTIME` <a name="EDGE_RUNTIME" id="@nikovirtala/projen-vitest.Environment.EDGE_RUNTIME"></a>
+
+Run tests in Vercel's Edge Runtime VM.
+
+https://edge-runtime.vercel.app/packages/vm
+
+---
+
+
+##### `HAPPY_DOM` <a name="HAPPY_DOM" id="@nikovirtala/projen-vitest.Environment.HAPPY_DOM"></a>
+
+Run tests in `happy-dom` environment.
+
+https://github.com/capricorn86/happy-dom
+
+---
+
+
+##### `JSDOM` <a name="JSDOM" id="@nikovirtala/projen-vitest.Environment.JSDOM"></a>
+
+Run tests in `jsdom` environment.
+
+https://github.com/jsdom/jsdom
+
+---
+
+
+##### `NODE` <a name="NODE" id="@nikovirtala/projen-vitest.Environment.NODE"></a>
+
+Run tests in a Node.js environment.
+
+---
+
+
 ### Pool <a name="Pool" id="@nikovirtala/projen-vitest.Pool"></a>
 
 #### Members <a name="Members" id="Members"></a>
@@ -582,39 +629,6 @@ This makes tests run faster, but VM module is unstable. Your tests might leak me
 Run tests in isolated `node:vm`. Test files are run parallel using `node:worker_threads`.
 
 This makes tests run faster, but VM module is unstable. Your tests might leak memory.
-
----
-
-
-### VitestEnvironment <a name="VitestEnvironment" id="@nikovirtala/projen-vitest.VitestEnvironment"></a>
-
-#### Members <a name="Members" id="Members"></a>
-
-| **Name** | **Description** |
-| --- | --- |
-| <code><a href="#@nikovirtala/projen-vitest.VitestEnvironment.EDGE_RUNTIME">EDGE_RUNTIME</a></code> | *No description.* |
-| <code><a href="#@nikovirtala/projen-vitest.VitestEnvironment.HAPPY_DOM">HAPPY_DOM</a></code> | *No description.* |
-| <code><a href="#@nikovirtala/projen-vitest.VitestEnvironment.JSDOM">JSDOM</a></code> | *No description.* |
-| <code><a href="#@nikovirtala/projen-vitest.VitestEnvironment.NODE">NODE</a></code> | *No description.* |
-
----
-
-##### `EDGE_RUNTIME` <a name="EDGE_RUNTIME" id="@nikovirtala/projen-vitest.VitestEnvironment.EDGE_RUNTIME"></a>
-
----
-
-
-##### `HAPPY_DOM` <a name="HAPPY_DOM" id="@nikovirtala/projen-vitest.VitestEnvironment.HAPPY_DOM"></a>
-
----
-
-
-##### `JSDOM` <a name="JSDOM" id="@nikovirtala/projen-vitest.VitestEnvironment.JSDOM"></a>
-
----
-
-
-##### `NODE` <a name="NODE" id="@nikovirtala/projen-vitest.VitestEnvironment.NODE"></a>
 
 ---
 

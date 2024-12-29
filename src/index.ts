@@ -4,10 +4,31 @@ import { Project } from "projen/lib/project";
 import { TextFile } from "projen/lib/textfile";
 import { configDefaults } from "vitest/config";
 
-export enum VitestEnvironment {
+export enum Environment {
+    /**
+     * Run tests in Vercel's Edge Runtime VM.
+     *
+     * https://edge-runtime.vercel.app/packages/vm
+     */
     EDGE_RUNTIME = "edge-runtime",
+
+    /**
+     * Run tests in `happy-dom` environment.
+     *
+     * https://github.com/capricorn86/happy-dom
+     */
     HAPPY_DOM = "happy-dom",
+
+    /**
+     * Run tests in `jsdom` environment.
+     *
+     * https://github.com/jsdom/jsdom
+     */
     JSDOM = "jsdom",
+
+    /**
+     * Run tests in a Node.js environment.
+     */
     NODE = "node",
 }
 
@@ -81,7 +102,7 @@ export interface VitestConfigOptions {
      *
      * @default "node"
      */
-    readonly environment?: VitestEnvironment;
+    readonly environment?: Environment;
 
     /**
      * Run tests in an isolated environment. This option has no effect on vmThreads pool.
@@ -181,7 +202,7 @@ export class Vitest extends Component {
         this.exclude = new Set(options.config?.exclude ?? [...configDefaults.exclude]);
         this.isolate = options.config?.isolate ?? true;
         this.pool = options.config?.pool ?? Pool.FORKS;
-        this.environment = options.config?.environment ?? VitestEnvironment.NODE;
+        this.environment = options.config?.environment ?? Environment.NODE;
         this.globals = options.config?.globals ?? false;
         this.coverageProvider = options.config?.coverageProvider ?? CoverageProvider.V8;
         this.coverageReporters = options.config?.coverageReporters ?? [CoverageReporter.TEXT, CoverageReporter.LCOV];
@@ -203,7 +224,7 @@ export class Vitest extends Component {
         this.synthesizeConfig();
     }
 
-    public configureEnvironment(env: VitestEnvironment): void {
+    public configureEnvironment(env: Environment): void {
         this.environment = env;
         this.synthesizeConfig();
     }

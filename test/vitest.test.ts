@@ -1,6 +1,6 @@
 import { NodeProject } from "projen/lib/javascript";
 import { synthSnapshot } from "projen/lib/util/synth";
-import { Vitest, VitestEnvironment, CoverageProvider, CoverageReporter, Pool } from "../src";
+import { Vitest, Environment, CoverageProvider, CoverageReporter, Pool } from "../src";
 
 describe("jest", () => {
     test("throws when jest is enabled", () => {
@@ -39,7 +39,7 @@ describe("vitest", () => {
 
     test("custom environment", () => {
         const vitest = new Vitest(project);
-        vitest.configureEnvironment(VitestEnvironment.JSDOM);
+        vitest.configureEnvironment(Environment.JSDOM);
 
         const snapshot = synthSnapshot(project);
         expect(snapshot["vitest.config.ts"]).toContain('environment: "jsdom"');
@@ -82,7 +82,7 @@ describe("vitest", () => {
             configFilePath: "custom.vitest.config.ts",
             vitestVersion: "^3",
             config: {
-                environment: VitestEnvironment.HAPPY_DOM,
+                environment: Environment.HAPPY_DOM,
                 isolate: false,
                 pool: Pool.THREADS,
                 globals: false,
