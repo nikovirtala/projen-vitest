@@ -340,7 +340,7 @@ public readonly exclude: string[];
 ```
 
 - *Type:* string[]
-- *Default:* configDefaults.exclude
+- *Default:* Vitest's `configDefaults.exclude`
 
 A list of glob patterns that should be excluded from your test files.
 
@@ -371,7 +371,7 @@ public readonly include: string[];
 ```
 
 - *Type:* string[]
-- *Default:* configDefaults.include
+- *Default:* Vitest's `configDefaults.include`
 
 A list of glob patterns that match your test files.
 

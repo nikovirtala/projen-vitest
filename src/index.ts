@@ -31,7 +31,7 @@ export interface VitestConfigOptions {
     /**
      * A list of glob patterns that match your test files. https://vitest.dev/config/#include
      *
-     * @default configDefaults.include
+     * @default - Vitest's `configDefaults.include`
      */
     readonly include?: Array<string>;
 
@@ -39,7 +39,7 @@ export interface VitestConfigOptions {
      * A list of glob patterns that should be excluded from your test files.
      * https://vitest.dev/config/#exclude
      *
-     * @default configDefaults.exclude
+     * @default - Vitest's `configDefaults.exclude`
      */
     readonly exclude?: Array<string>;
 
