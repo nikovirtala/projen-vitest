@@ -272,6 +272,7 @@ const vitestConfigOptions: VitestConfigOptions = { ... }
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.exclude">exclude</a></code> | <code>string[]</code> | A list of glob patterns that should be excluded from your test files. |
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.globals">globals</a></code> | <code>boolean</code> | Register apis globally. |
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.include">include</a></code> | <code>string[]</code> | A list of glob patterns that match your test files. |
+| <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.isolate">isolate</a></code> | <code>boolean</code> | Run tests in an isolated environment. This option has no effect on vmThreads pool. |
 
 ---
 
@@ -376,6 +377,23 @@ public readonly include: string[];
 A list of glob patterns that match your test files.
 
 https://vitest.dev/config/#include
+
+---
+
+##### `isolate`<sup>Optional</sup> <a name="isolate" id="@nikovirtala/projen-vitest.VitestConfigOptions.property.isolate"></a>
+
+```typescript
+public readonly isolate: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Run tests in an isolated environment. This option has no effect on vmThreads pool.
+
+Disabling this option might improve performance if your code doesn't rely on side effects.
+
+https://vitest.dev/config/#isolate
 
 ---
 

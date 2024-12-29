@@ -83,6 +83,7 @@ describe("vitest", () => {
             vitestVersion: "^3",
             config: {
                 environment: VitestEnvironment.HAPPY_DOM,
+                isolate: false,
                 globals: false,
                 coverageProvider: CoverageProvider.ISTANBUL,
                 coverageReporters: [CoverageReporter.HTML],
@@ -95,6 +96,7 @@ describe("vitest", () => {
         const snapshot = synthSnapshot(project);
         expect(snapshot["custom.vitest.config.ts"]).toBeDefined();
         expect(snapshot["custom.vitest.config.ts"]).toContain('environment: "happy-dom"');
+        expect(snapshot["custom.vitest.config.ts"]).toContain("isolate: false");
         expect(snapshot["custom.vitest.config.ts"]).toContain("globals: false");
         expect(snapshot["custom.vitest.config.ts"]).toContain('provider: "istanbul"');
         expect(snapshot["custom.vitest.config.ts"]).toContain('reporter: ["html"]');

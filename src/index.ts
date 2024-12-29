@@ -51,6 +51,17 @@ export interface VitestConfigOptions {
     readonly environment?: VitestEnvironment;
 
     /**
+     * Run tests in an isolated environment. This option has no effect on vmThreads pool.
+     *
+     * Disabling this option might improve performance if your code doesn't rely on side effects.
+     *
+     * https://vitest.dev/config/#isolate
+     *
+     * @default true
+     */
+    readonly isolate?: boolean;
+
+    /**
      * Register apis globally. If you prefer to use the APIs globally like Jest, set to `true`.
      * https://vitest.dev/config/#globals
      *
@@ -110,6 +121,7 @@ export class Vitest extends Component {
     private readonly configFilePath: string;
     private readonly include: Set<string>;
     private readonly exclude: Set<string>;
+    private readonly isolate: boolean;
     private environment: string;
     private globals: boolean;
     private coverageProvider: string;
@@ -126,6 +138,7 @@ export class Vitest extends Component {
         this.configFilePath = options.configFilePath ?? "vitest.config.ts";
         this.include = new Set(options.config?.include ?? [...configDefaults.include]);
         this.exclude = new Set(options.config?.exclude ?? [...configDefaults.exclude]);
+        this.isolate = options.config?.isolate ?? true;
         this.environment = options.config?.environment ?? VitestEnvironment.NODE;
         this.globals = options.config?.globals ?? false;
         this.coverageProvider = options.config?.coverageProvider ?? CoverageProvider.V8;
@@ -208,6 +221,7 @@ export class Vitest extends Component {
             lines.push(`    exclude: ${JSON.stringify(Array.from(this.exclude))},`);
         }
 
+        lines.push(`    isolate: ${this.isolate},`);
         lines.push(`    environment: "${this.environment}",`);
         lines.push(`    globals: ${this.globals},`);
 
