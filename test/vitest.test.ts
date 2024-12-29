@@ -33,8 +33,10 @@ describe("vitest", () => {
         expect(() => new Vitest(project)).not.toThrow();
 
         const snapshot = synthSnapshot(project);
+
         expect(snapshot["vitest.config.ts"]).toBeDefined();
         expect(snapshot["package.json"].devDependencies.vitest).toBe("^2");
+        expect(snapshot["package.json"].devDependencies["@vitest/coverage-v8"]).toBe("^2");
     });
 
     test("custom environment", () => {
@@ -50,7 +52,9 @@ describe("vitest", () => {
         vitest.configureCoverageProvider(CoverageProvider.ISTANBUL);
 
         const snapshot = synthSnapshot(project);
+
         expect(snapshot["vitest.config.ts"]).toContain('provider: "istanbul"');
+        expect(snapshot["package.json"].devDependencies["@vitest/coverage-istanbul"]).toBe("^2");
     });
 
     test("custom coverage reporters", () => {
@@ -75,6 +79,14 @@ describe("vitest", () => {
 
         const snapshot = synthSnapshot(project);
         expect(snapshot["vitest.config.ts"]).toContain('"**/*.test.js"');
+    });
+
+    test("handles non-existent dependencies gracefully", () => {
+        const vitest = new Vitest(project);
+
+        expect(() => vitest.configureCoverageProvider(CoverageProvider.V8)).not.toThrow();
+        expect(() => vitest.configureCoverageProvider(CoverageProvider.ISTANBUL)).not.toThrow();
+        expect(() => vitest.configureCoverageProvider(CoverageProvider.V8)).not.toThrow();
     });
 
     test("initialize with custom options", () => {

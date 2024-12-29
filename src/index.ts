@@ -1,4 +1,5 @@
 import { Component } from "projen/lib/component";
+import { DependencyType } from "projen/lib/dependencies";
 import { Jest, NodeProject } from "projen/lib/javascript";
 import { Project } from "projen/lib/project";
 import { TextFile } from "projen/lib/textfile";
@@ -220,9 +221,10 @@ export class Vitest extends Component {
     private readonly coverageEnabled: boolean;
     private environment: string;
     private globals: boolean;
-    private coverageProvider: string;
-    private coverageReporters: Array<string>;
+    private coverageProvider: CoverageProvider;
+    private coverageReporters: Array<CoverageReporter>;
     private coverageDirectory: string;
+    private version: string;
 
     constructor(project: NodeProject, options: VitestOptions = {}) {
         super(project);
@@ -242,9 +244,11 @@ export class Vitest extends Component {
         this.coverageProvider = options.config?.coverageProvider ?? CoverageProvider.V8;
         this.coverageReporters = options.config?.coverageReporters ?? [CoverageReporter.TEXT, CoverageReporter.LCOV];
         this.coverageDirectory = options.config?.coverageDirectory ?? "coverage";
+        this.version = options.vitestVersion ?? "^2";
 
-        project.addDevDeps(`vitest@${options.vitestVersion ?? "^2"}`);
+        project.addDevDeps(`vitest@${this.version}`);
 
+        this.configureCoverageProvider(this.coverageProvider);
         this.addTestCommand();
         this.synthesizeConfig();
     }
@@ -267,6 +271,21 @@ export class Vitest extends Component {
     }
 
     public configureCoverageProvider(provider: CoverageProvider): void {
+        const providerPackages = {
+            [CoverageProvider.V8]: `@vitest/coverage-v8@${this.version}`,
+            [CoverageProvider.ISTANBUL]: `@vitest/coverage-istanbul@${this.version}`,
+        };
+
+        // remove existing provider packages if they exist
+        Object.values(providerPackages).forEach((providerPackage) => {
+            try {
+                this.project.deps.removeDependency(providerPackage);
+            } catch {
+                // ignore errors when dependency doesn't exist
+            }
+        });
+
+        this.project.deps.addDependency(providerPackages[provider], DependencyType.DEVENV);
         this.coverageProvider = provider;
         this.synthesizeConfig();
     }
