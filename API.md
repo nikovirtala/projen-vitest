@@ -249,6 +249,10 @@ public readonly project: Project;
 
 ### VitestConfigOptions <a name="VitestConfigOptions" id="@nikovirtala/projen-vitest.VitestConfigOptions"></a>
 
+Vitest Config.
+
+https://vitest.dev/config/
+
 #### Initializer <a name="Initializer" id="@nikovirtala/projen-vitest.VitestConfigOptions.Initializer"></a>
 
 ```typescript
@@ -262,12 +266,12 @@ const vitestConfigOptions: VitestConfigOptions = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.coverageDirectory">coverageDirectory</a></code> | <code>string</code> | Coverage output directory. |
-| <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.coverageProvider">coverageProvider</a></code> | <code><a href="#@nikovirtala/projen-vitest.CoverageProvider">CoverageProvider</a></code> | Coverage reporter type. |
+| <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.coverageProvider">coverageProvider</a></code> | <code><a href="#@nikovirtala/projen-vitest.CoverageProvider">CoverageProvider</a></code> | Coverage provider type. |
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.coverageReporters">coverageReporters</a></code> | <code><a href="#@nikovirtala/projen-vitest.CoverageReporter">CoverageReporter</a>[]</code> | Coverage reporters. |
-| <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.environment">environment</a></code> | <code><a href="#@nikovirtala/projen-vitest.VitestEnvironment">VitestEnvironment</a></code> | Test environment. |
-| <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.exclude">exclude</a></code> | <code>string[]</code> | Exclude patterns for test files. |
+| <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.environment">environment</a></code> | <code><a href="#@nikovirtala/projen-vitest.VitestEnvironment">VitestEnvironment</a></code> | The environment that will be used for testing. |
+| <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.exclude">exclude</a></code> | <code>string[]</code> | A list of glob patterns that should be excluded from your test files. |
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.globals">globals</a></code> | <code>boolean</code> | Enable globals. |
-| <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.include">include</a></code> | <code>string[]</code> | Include patterns for test files. |
+| <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.include">include</a></code> | <code>string[]</code> | A list of glob patterns that match your test files. |
 
 ---
 
@@ -293,7 +297,9 @@ public readonly coverageProvider: CoverageProvider;
 - *Type:* <a href="#@nikovirtala/projen-vitest.CoverageProvider">CoverageProvider</a>
 - *Default:* "v8"
 
-Coverage reporter type.
+Coverage provider type.
+
+https://vitest.dev/config/#coverage-provider
 
 ---
 
@@ -308,6 +314,8 @@ public readonly coverageReporters: CoverageReporter[];
 
 Coverage reporters.
 
+https://vitest.dev/config/#coverage-reporter
+
 ---
 
 ##### `environment`<sup>Optional</sup> <a name="environment" id="@nikovirtala/projen-vitest.VitestConfigOptions.property.environment"></a>
@@ -319,7 +327,9 @@ public readonly environment: VitestEnvironment;
 - *Type:* <a href="#@nikovirtala/projen-vitest.VitestEnvironment">VitestEnvironment</a>
 - *Default:* "node"
 
-Test environment.
+The environment that will be used for testing.
+
+https://vitest.dev/config/#environment
 
 ---
 
@@ -330,8 +340,11 @@ public readonly exclude: string[];
 ```
 
 - *Type:* string[]
+- *Default:* configDefaults.exclude
 
-Exclude patterns for test files.
+A list of glob patterns that should be excluded from your test files.
+
+https://vitest.dev/config/#exclude
 
 ---
 
@@ -346,6 +359,8 @@ public readonly globals: boolean;
 
 Enable globals.
 
+https://vitest.dev/config/#globals
+
 ---
 
 ##### `include`<sup>Optional</sup> <a name="include" id="@nikovirtala/projen-vitest.VitestConfigOptions.property.include"></a>
@@ -355,8 +370,11 @@ public readonly include: string[];
 ```
 
 - *Type:* string[]
+- *Default:* configDefaults.include
 
-Include patterns for test files.
+A list of glob patterns that match your test files.
+
+https://vitest.dev/config/#include
 
 ---
 

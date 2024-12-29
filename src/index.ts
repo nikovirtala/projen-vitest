@@ -24,47 +24,55 @@ export enum CoverageReporter {
     TEXT = "text",
 }
 
+/**
+ * Vitest Config. https://vitest.dev/config/
+ */
 export interface VitestConfigOptions {
     /**
-     * Include patterns for test files
+     * A list of glob patterns that match your test files. https://vitest.dev/config/#include
+     *
+     * @default configDefaults.include
      */
     readonly include?: Array<string>;
 
     /**
-     * Exclude patterns for test files
+     * A list of glob patterns that should be excluded from your test files.
+     * https://vitest.dev/config/#exclude
+     *
+     * @default configDefaults.exclude
      */
     readonly exclude?: Array<string>;
 
     /**
-     * Test environment
+     * The environment that will be used for testing. https://vitest.dev/config/#environment
      *
      * @default "node"
      */
     readonly environment?: VitestEnvironment;
 
     /**
-     * Enable globals
+     * Enable globals. https://vitest.dev/config/#globals
      *
      * @default true
      */
     readonly globals?: boolean;
 
     /**
-     * Coverage reporter type
+     * Coverage provider type. https://vitest.dev/config/#coverage-provider
      *
      * @default "v8"
      */
     readonly coverageProvider?: CoverageProvider;
 
     /**
-     * Coverage reporters
+     * Coverage reporters. https://vitest.dev/config/#coverage-reporter
      *
      * @default '["text", "lcov"]'
      */
     readonly coverageReporters?: Array<CoverageReporter>;
 
     /**
-     * Coverage output directory
+     * Coverage output directory.
      *
      * @default "coverage"
      */
@@ -73,18 +81,20 @@ export interface VitestConfigOptions {
 
 export interface VitestOptions {
     /**
-     * Config file path
+     * Config file path.
+     *
      * @default "vitest.config.ts"
      */
     readonly configFilePath?: string;
 
     /**
-     * Initial config options
+     * Initial config options.
      */
     readonly config?: VitestConfigOptions;
 
     /**
-     * Vitest version
+     * Vitest version.
+     *
      * @default "^2"
      */
     readonly vitestVersion?: string;
