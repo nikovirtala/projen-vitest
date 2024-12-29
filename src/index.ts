@@ -214,6 +214,13 @@ export interface VitestConfigOptions {
      * @default true
      */
     readonly passWithNoTests?: boolean;
+
+    /**
+     * Stop running tests after certain number of failures. https://vitest.dev/config/#bail
+     *
+     * @default 0
+     */
+    readonly bail?: number;
 }
 
 export interface VitestOptions {
@@ -253,6 +260,7 @@ export class Vitest extends Component {
     private readonly typecheckChecker: string;
     private readonly typecheckTsconfig: string;
     private readonly passWithNoTests: boolean;
+    private readonly bail: number;
     private environment: string;
     private globals: boolean;
     private coverageProvider: CoverageProvider;
@@ -277,6 +285,7 @@ export class Vitest extends Component {
         this.typecheckChecker = options.config?.typecheckChecker ?? "tsc --noEmit";
         this.typecheckTsconfig = options.config?.typecheckTsconfig ?? "tsconfig.dev.json";
         this.passWithNoTests = options.config?.passWithNoTests ?? true;
+        this.bail = options.config?.bail ?? 0;
         this.environment = options.config?.environment ?? Environment.NODE;
         this.globals = options.config?.globals ?? false;
         this.coverageProvider = options.config?.coverageProvider ?? CoverageProvider.V8;
@@ -371,6 +380,7 @@ export class Vitest extends Component {
     private renderTestOptions(): Array<string> {
         const lines: Array<string> = [];
 
+        lines.push(`    bail: ${this.bail},`);
         lines.push("    coverage: {");
         lines.push(`      enabled: ${this.coverageEnabled},`);
         lines.push(`      provider: "${this.coverageProvider}",`);

@@ -108,6 +108,7 @@ describe("vitest", () => {
                 typecheckChecker: "tsc",
                 typecheckTsconfig: "tsconfig.custom.json",
                 passWithNoTests: false,
+                bail: 5,
             },
         });
 
@@ -126,6 +127,7 @@ describe("vitest", () => {
         expect(snapshot["custom.vitest.config.ts"]).toContain('reportsDirectory: "custom-coverage"');
         expect(snapshot["custom.vitest.config.ts"]).toContain('"**/*.test.ts"');
         expect(snapshot["custom.vitest.config.ts"]).toContain('"**/*.spec.js"');
+        expect(snapshot["custom.vitest.config.ts"]).toContain("bail: 5");
         expect(snapshot["package.json"].devDependencies.vitest).toBe("^3");
     });
 

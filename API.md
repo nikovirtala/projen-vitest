@@ -265,6 +265,7 @@ const vitestConfigOptions: VitestConfigOptions = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
+| <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.bail">bail</a></code> | <code>number</code> | Stop running tests after certain number of failures. |
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.coverageDirectory">coverageDirectory</a></code> | <code>string</code> | Coverage output directory. |
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.coverageEnabled">coverageEnabled</a></code> | <code>boolean</code> | Coverage enabled. |
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.coverageProvider">coverageProvider</a></code> | <code><a href="#@nikovirtala/projen-vitest.CoverageProvider">CoverageProvider</a></code> | Coverage provider type. |
@@ -279,6 +280,21 @@ const vitestConfigOptions: VitestConfigOptions = { ... }
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.typecheckChecker">typecheckChecker</a></code> | <code>string</code> | Tool to use for type checking. Checker should implement the same output format as `tsc`. |
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.typecheckEnabled">typecheckEnabled</a></code> | <code>boolean</code> | Enable typechecking alongside your regular tests. |
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.typecheckTsconfig">typecheckTsconfig</a></code> | <code>string</code> | Path to custom tsconfig, relative to the project root. |
+
+---
+
+##### `bail`<sup>Optional</sup> <a name="bail" id="@nikovirtala/projen-vitest.VitestConfigOptions.property.bail"></a>
+
+```typescript
+public readonly bail: number;
+```
+
+- *Type:* number
+- *Default:* 0
+
+Stop running tests after certain number of failures.
+
+https://vitest.dev/config/#bail
 
 ---
 
