@@ -275,6 +275,9 @@ const vitestConfigOptions: VitestConfigOptions = { ... }
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.include">include</a></code> | <code>string[]</code> | A list of glob patterns that match your test files. |
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.isolate">isolate</a></code> | <code>boolean</code> | Run tests in an isolated environment. This option has no effect on vmThreads pool. |
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.pool">pool</a></code> | <code><a href="#@nikovirtala/projen-vitest.Pool">Pool</a></code> | Pool used to run tests in. |
+| <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.typecheckChecker">typecheckChecker</a></code> | <code>string</code> | Tool to use for type checking. Checker should implement the same output format as `tsc`. |
+| <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.typecheckEnabled">typecheckEnabled</a></code> | <code>boolean</code> | Enable typechecking alongside your regular tests. |
+| <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.typecheckTsconfig">typecheckTsconfig</a></code> | <code>string</code> | Path to custom tsconfig, relative to the project root. |
 
 ---
 
@@ -426,6 +429,51 @@ public readonly pool: Pool;
 Pool used to run tests in.
 
 https://vitest.dev/config/#pool
+
+---
+
+##### `typecheckChecker`<sup>Optional</sup> <a name="typecheckChecker" id="@nikovirtala/projen-vitest.VitestConfigOptions.property.typecheckChecker"></a>
+
+```typescript
+public readonly typecheckChecker: string;
+```
+
+- *Type:* string
+- *Default:* "tsc --noEmit"
+
+Tool to use for type checking. Checker should implement the same output format as `tsc`.
+
+https://vitest.dev/config/#typecheck-checker
+
+---
+
+##### `typecheckEnabled`<sup>Optional</sup> <a name="typecheckEnabled" id="@nikovirtala/projen-vitest.VitestConfigOptions.property.typecheckEnabled"></a>
+
+```typescript
+public readonly typecheckEnabled: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Enable typechecking alongside your regular tests.
+
+https://vitest.dev/config/#typecheck-enabled
+
+---
+
+##### `typecheckTsconfig`<sup>Optional</sup> <a name="typecheckTsconfig" id="@nikovirtala/projen-vitest.VitestConfigOptions.property.typecheckTsconfig"></a>
+
+```typescript
+public readonly typecheckTsconfig: string;
+```
+
+- *Type:* string
+- *Default:* "tsconfig.dev.json"
+
+Path to custom tsconfig, relative to the project root.
+
+https://vitest.dev/config/#typecheck-tsconfig
 
 ---
 

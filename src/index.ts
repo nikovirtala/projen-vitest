@@ -184,6 +184,29 @@ export interface VitestConfigOptions {
      * @default "coverage"
      */
     readonly coverageDirectory?: string;
+
+    /**
+     * Enable typechecking alongside your regular tests. https://vitest.dev/config/#typecheck-enabled
+     *
+     * @default true
+     */
+    readonly typecheckEnabled?: boolean;
+
+    /**
+     * Tool to use for type checking. Checker should implement the same output format as `tsc`.
+     *
+     * https://vitest.dev/config/#typecheck-checker
+     *
+     * @default "tsc --noEmit"
+     */
+    readonly typecheckChecker?: string;
+
+    /**
+     * Path to custom tsconfig, relative to the project root. https://vitest.dev/config/#typecheck-tsconfig
+     *
+     * @default "tsconfig.dev.json"
+     */
+    readonly typecheckTsconfig?: string;
 }
 
 export interface VitestOptions {
@@ -219,6 +242,9 @@ export class Vitest extends Component {
     private readonly isolate: boolean;
     private readonly pool: Pool;
     private readonly coverageEnabled: boolean;
+    private readonly typecheckEnabled: boolean;
+    private readonly typecheckChecker: string;
+    private readonly typecheckTsconfig: string;
     private environment: string;
     private globals: boolean;
     private coverageProvider: CoverageProvider;
@@ -239,6 +265,9 @@ export class Vitest extends Component {
         this.isolate = options.config?.isolate ?? true;
         this.pool = options.config?.pool ?? Pool.FORKS;
         this.coverageEnabled = options.config?.coverageEnabled ?? true;
+        this.typecheckEnabled = options.config?.typecheckEnabled ?? true;
+        this.typecheckChecker = options.config?.typecheckChecker ?? "tsc --noEmit";
+        this.typecheckTsconfig = options.config?.typecheckTsconfig ?? "tsconfig.dev.json";
         this.environment = options.config?.environment ?? Environment.NODE;
         this.globals = options.config?.globals ?? false;
         this.coverageProvider = options.config?.coverageProvider ?? CoverageProvider.V8;
@@ -343,7 +372,12 @@ export class Vitest extends Component {
         lines.push(`    globals: ${this.globals},`);
         lines.push(`    include: ${JSON.stringify(Array.from(this.include))},`);
         lines.push(`    isolate: ${this.isolate},`);
-        lines.push(`    pool: "${this.pool}", `);
+        lines.push(`    pool: "${this.pool}",`);
+        lines.push("    typecheck: {");
+        lines.push(`      checker: "${this.typecheckChecker}",`);
+        lines.push(`      enabled: ${this.typecheckEnabled},`);
+        lines.push(`      tsconfig: "${this.typecheckTsconfig}",`);
+        lines.push("    },");
 
         return lines;
     }

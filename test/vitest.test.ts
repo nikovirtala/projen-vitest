@@ -104,6 +104,9 @@ describe("vitest", () => {
                 coverageDirectory: "custom-coverage",
                 include: ["**/*.test.ts"],
                 exclude: ["**/*.spec.js"],
+                typecheckEnabled: false,
+                typecheckChecker: "tsc",
+                typecheckTsconfig: "tsconfig.custom.json",
             },
         });
 
@@ -114,6 +117,8 @@ describe("vitest", () => {
         expect(snapshot["custom.vitest.config.ts"]).toContain('pool: "threads"');
         expect(snapshot["custom.vitest.config.ts"]).toContain("globals: false");
         expect(snapshot["custom.vitest.config.ts"]).toContain("enabled: false");
+        expect(snapshot["custom.vitest.config.ts"]).toContain('checker: "tsc"');
+        expect(snapshot["custom.vitest.config.ts"]).toContain('tsconfig: "tsconfig.custom.json"');
         expect(snapshot["custom.vitest.config.ts"]).toContain('provider: "istanbul"');
         expect(snapshot["custom.vitest.config.ts"]).toContain('reporter: ["html"]');
         expect(snapshot["custom.vitest.config.ts"]).toContain('reportsDirectory: "custom-coverage"');
