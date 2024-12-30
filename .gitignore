@@ -50,6 +50,7 @@ jspm_packages/
 .jsii
 tsconfig.json
 !/API.md
+/coverage/
 !/vitest.config.ts
 !/.vscode/extensions.json
 !/.vscode/settings.json

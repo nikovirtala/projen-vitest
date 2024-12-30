@@ -1,3 +1,4 @@
+import * as path from "path";
 import { Component } from "projen/lib/component";
 import { DependencyType } from "projen/lib/dependencies";
 import { Jest, NodeProject } from "projen/lib/javascript";
@@ -328,6 +329,10 @@ export class Vitest extends Component {
         if (this.globals && this.isTypescriptProject() && this.project.tryFindObjectFile(this.typecheckTsconfig)) {
             this.configureGlobals();
         }
+
+        const coverageDirectoryPath = path.posix.join("/", this.coverageDirectory, "/");
+        project.npmignore?.exclude(coverageDirectoryPath);
+        project.gitignore.exclude(coverageDirectoryPath);
 
         this.addTestCommand();
         this.synthesizeConfig();
