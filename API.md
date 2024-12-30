@@ -293,6 +293,7 @@ const vitestConfigOptions: VitestConfigOptions = { ... }
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.typecheckChecker">typecheckChecker</a></code> | <code>string</code> | Tool to use for type checking. Checker should implement the same output format as `tsc`. |
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.typecheckEnabled">typecheckEnabled</a></code> | <code>boolean</code> | Enable typechecking alongside your regular tests. |
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.typecheckTsconfig">typecheckTsconfig</a></code> | <code>string</code> | Path to custom tsconfig, relative to the project root. |
+| <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.updateSnapshots">updateSnapshots</a></code> | <code>boolean</code> | Update snapshot files. |
 
 ---
 
@@ -519,6 +520,22 @@ public readonly typecheckTsconfig: string;
 Path to custom tsconfig, relative to the project root.
 
 https://vitest.dev/config/#typecheck-tsconfig
+
+---
+
+##### `updateSnapshots`<sup>Optional</sup> <a name="updateSnapshots" id="@nikovirtala/projen-vitest.VitestConfigOptions.property.updateSnapshots"></a>
+
+```typescript
+public readonly updateSnapshots: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Update snapshot files.
+
+This will update all changed snapshots and delete obsolete ones.
+https://vitest.dev/guide/snapshot.html#updating-snapshots
 
 ---
 

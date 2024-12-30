@@ -221,6 +221,14 @@ export interface VitestConfigOptions {
      * @default 0
      */
     readonly bail?: number;
+
+    /**
+     * Update snapshot files. This will update all changed snapshots and delete obsolete ones.
+     * https://vitest.dev/guide/snapshot.html#updating-snapshots
+     *
+     * @default true
+     */
+    readonly updateSnapshots?: boolean;
 }
 
 export interface VitestOptions {
@@ -261,6 +269,7 @@ export class Vitest extends Component {
     private readonly typecheckTsconfig: string;
     private readonly passWithNoTests: boolean;
     private readonly bail: number;
+    private readonly updateSnapshots: boolean;
     private environment: string;
     private globals: boolean;
     private coverageProvider: CoverageProvider;
@@ -292,6 +301,7 @@ export class Vitest extends Component {
         this.coverageReporters = options.config?.coverageReporters ?? [CoverageReporter.TEXT, CoverageReporter.LCOV];
         this.coverageDirectory = options.config?.coverageDirectory ?? "coverage";
         this.version = options.vitestVersion ?? "^2";
+        this.updateSnapshots = options.config?.updateSnapshots ?? true;
 
         project.addDevDeps(`vitest@${this.version}`);
 
@@ -381,6 +391,14 @@ export class Vitest extends Component {
                 receiveArgs: true,
             });
         }
+
+        const testUpdateSnapshots = this.project.tasks.tryFind("test:update");
+        if (!testUpdateSnapshots) {
+            this.project.addTask("test:update", {
+                exec: "vitest --update",
+                receiveArgs: true,
+            });
+        }
     }
 
     private synthesizeConfig(): void {
@@ -426,6 +444,7 @@ export class Vitest extends Component {
         lines.push(`      enabled: ${this.typecheckEnabled},`);
         lines.push(`      tsconfig: "${this.typecheckTsconfig}",`);
         lines.push("    },");
+        lines.push(`    update: ${this.updateSnapshots},`);
 
         return lines;
     }
