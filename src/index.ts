@@ -325,13 +325,13 @@ export class Vitest extends Component {
         };
 
         // remove existing provider packages if they exist
-        Object.values(providerPackages).forEach((providerPackage) => {
+        for (const providerPackage of Object.values(providerPackages)) {
             try {
                 this.project.deps.removeDependency(providerPackage);
             } catch {
                 // ignore errors when dependency doesn't exist
             }
-        });
+        }
 
         this.project.deps.addDependency(providerPackages[provider], DependencyType.DEVENV);
         this.coverageProvider = provider;
