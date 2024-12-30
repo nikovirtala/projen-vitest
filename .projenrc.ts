@@ -1,11 +1,11 @@
 import { cdk, javascript, TextFile } from "projen";
+import { Vitest } from "./src";
 
 const nodeVersion = "22.12.0";
 
 const project = new cdk.JsiiProject({
     author: "Niko Virtala",
     authorAddress: "niko.virtala@hey.com",
-    bundledDeps: ["vitest"],
     defaultReleaseBranch: "main",
     deps: ["projen"],
     description: "Vitest component for projen Node.js projects",
@@ -21,9 +21,11 @@ const project = new cdk.JsiiProject({
     },
     mergify: true,
     autoMerge: true,
+    jest: false,
     jsiiVersion: "~5.7.0",
     license: "MIT",
     licensed: true,
+    majorVersion: 1,
     minNodeVersion: nodeVersion,
     name: "projen-vitest",
     npmAccess: javascript.NpmAccess.PUBLIC,
@@ -45,7 +47,16 @@ const project = new cdk.JsiiProject({
     typescriptVersion: "5.7.2",
 });
 
+project.eslint?.addOverride({
+    files: ["*"],
+    rules: {
+        "import/no-extraneous-dependencies": ["warn"],
+    },
+});
+
 project.npmrc.addConfig("node-linker", "hoisted");
+
+new Vitest(project);
 
 project.vscode?.extensions.addRecommendations("dbaeumer.vscode-eslint", "esbenp.prettier-vscode");
 
