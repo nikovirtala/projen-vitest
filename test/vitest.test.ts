@@ -41,6 +41,7 @@ describe("vitest", () => {
         expect(snapshot["vitest.config.ts"]).toContain("update: true");
         expect(snapshot["package.json"].scripts["test:update"]).toBe("npx projen test:update");
         expect(snapshot["vitest.config.ts"]).toContain("printConsoleTrace: true");
+        expect(snapshot["vitest.config.ts"]).toContain("slowTestThreshold: 300");
     });
 
     test("custom environment", () => {
@@ -124,6 +125,7 @@ describe("vitest", () => {
                 bail: 5,
                 updateSnapshots: false,
                 printConsoleTrace: false,
+                slowTestThreshold: 500,
             },
         });
 
@@ -145,6 +147,7 @@ describe("vitest", () => {
         expect(snapshot["custom.vitest.config.ts"]).toContain("bail: 5");
         expect(snapshot["custom.vitest.config.ts"]).toContain("update: false");
         expect(snapshot["custom.vitest.config.ts"]).toContain("printConsoleTrace: false");
+        expect(snapshot["custom.vitest.config.ts"]).toContain("slowTestThreshold: 500");
         expect(snapshot["package.json"].devDependencies.vitest).toBe("^3");
     });
 

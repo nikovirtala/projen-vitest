@@ -236,6 +236,14 @@ export interface VitestConfigOptions {
      * @default true
      */
     readonly printConsoleTrace?: boolean;
+
+    /**
+     * The number of milliseconds after which a test or suite is considered slow.
+     * https://vitest.dev/config/#slowtestthreshold
+     *
+     * @default 300
+     */
+    readonly slowTestThreshold?: number;
 }
 
 export interface VitestOptions {
@@ -284,6 +292,7 @@ export class Vitest extends Component {
     private coverageDirectory: string;
     private version: string;
     private readonly printConsoleTrace: boolean;
+    private readonly slowTestThreshold: number;
 
     constructor(project: NodeProject, options: VitestOptions = {}) {
         super(project);
@@ -311,6 +320,7 @@ export class Vitest extends Component {
         this.version = options.vitestVersion ?? "^2";
         this.updateSnapshots = options.config?.updateSnapshots ?? true;
         this.printConsoleTrace = options.config?.printConsoleTrace ?? true;
+        this.slowTestThreshold = options.config?.slowTestThreshold ?? 300;
 
         project.addDevDeps(`vitest@${this.version}`);
 
@@ -449,6 +459,7 @@ export class Vitest extends Component {
         lines.push(`    passWithNoTests: ${this.passWithNoTests},`);
         lines.push(`    printConsoleTrace: ${this.printConsoleTrace},`);
         lines.push(`    pool: "${this.pool}",`);
+        lines.push(`    slowTestThreshold: ${this.slowTestThreshold},`);
         lines.push("    typecheck: {");
         lines.push(`      checker: "${this.typecheckChecker}",`);
         lines.push(`      enabled: ${this.typecheckEnabled},`);

@@ -291,6 +291,7 @@ const vitestConfigOptions: VitestConfigOptions = { ... }
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.passWithNoTests">passWithNoTests</a></code> | <code>boolean</code> | Vitest will not fail, if no tests will be found. |
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.pool">pool</a></code> | <code><a href="#@nikovirtala/projen-vitest.Pool">Pool</a></code> | Pool used to run tests in. |
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.printConsoleTrace">printConsoleTrace</a></code> | <code>boolean</code> | Always print console traces when calling any console method. |
+| <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.slowTestThreshold">slowTestThreshold</a></code> | <code>number</code> | The number of milliseconds after which a test or suite is considered slow. |
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.typecheckChecker">typecheckChecker</a></code> | <code>string</code> | Tool to use for type checking. Checker should implement the same output format as `tsc`. |
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.typecheckEnabled">typecheckEnabled</a></code> | <code>boolean</code> | Enable typechecking alongside your regular tests. |
 | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions.property.typecheckTsconfig">typecheckTsconfig</a></code> | <code>string</code> | Path to custom tsconfig, relative to the project root. |
@@ -491,6 +492,21 @@ public readonly printConsoleTrace: boolean;
 Always print console traces when calling any console method.
 
 https://vitest.dev/config/#consoletrace
+
+---
+
+##### `slowTestThreshold`<sup>Optional</sup> <a name="slowTestThreshold" id="@nikovirtala/projen-vitest.VitestConfigOptions.property.slowTestThreshold"></a>
+
+```typescript
+public readonly slowTestThreshold: number;
+```
+
+- *Type:* number
+- *Default:* 300
+
+The number of milliseconds after which a test or suite is considered slow.
+
+https://vitest.dev/config/#slowtestthreshold
 
 ---
 
