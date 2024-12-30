@@ -199,17 +199,27 @@ describe("vitest", () => {
         test("updates tsconfig when globals configuration changes (false --> true)", () => {
             const vitest = new Vitest(project);
 
-            vitest.configureGlobals(true);
+            vitest.configureGlobals();
             const snapshot = synthSnapshot(project);
             expect(snapshot["tsconfig.dev.json"].compilerOptions.types).toContain("vitest/globals");
         });
 
-        test("updates tsconfig when globals configuration changes (true --> false)", () => {
-            const vitest = new Vitest(project);
+        test("throws when tsconfig file doesn't exist", () => {
+            const customProject = new TypeScriptProject({
+                name: "test-project",
+                defaultReleaseBranch: "main",
+                jest: false,
+            });
 
-            vitest.configureGlobals(false);
-            const snapshot = synthSnapshot(project);
-            expect(snapshot["tsconfig.dev.json"].compilerOptions.types || []).not.toContain("vitest/globals");
+            const vitest = new Vitest(customProject, {
+                config: {
+                    globals: true,
+                },
+            });
+
+            customProject.tryRemoveFile("tsconfig.dev.json");
+
+            expect(() => vitest.configureGlobals()).toThrow("unable to find tsconfig");
         });
     });
 

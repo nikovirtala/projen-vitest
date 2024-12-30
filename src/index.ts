@@ -323,9 +323,12 @@ export class Vitest extends Component {
         this.slowTestThreshold = options.config?.slowTestThreshold ?? 300;
 
         project.addDevDeps(`vitest@${this.version}`);
-
         this.configureCoverageProvider(this.coverageProvider);
-        this.updateTsConfig(this.globals);
+
+        if (this.globals && this.isTypescriptProject() && this.project.tryFindObjectFile(this.typecheckTsconfig)) {
+            this.configureGlobals();
+        }
+
         this.addTestCommand();
         this.synthesizeConfig();
     }
@@ -372,26 +375,21 @@ export class Vitest extends Component {
         this.synthesizeConfig();
     }
 
-    public configureGlobals(globals: boolean): void {
-        this.globals = globals;
-        this.updateTsConfig(globals);
+    // TODO: how about removing the `vitest/globals` from tsconfig?
+
+    public configureGlobals(): void {
+        this.updateTsConfig();
         this.synthesizeConfig();
     }
 
-    private updateTsConfig(globals: boolean): void {
-        if (!this.isTypescriptProject()) {
-            return;
-        }
-
+    private updateTsConfig(): void {
         const tsconfig = this.project.tryFindObjectFile(this.typecheckTsconfig);
 
         if (!tsconfig) {
             throw new Error("unable to find tsconfig");
         }
 
-        if (globals) {
-            tsconfig.addToArray("compilerOptions.types", "vitest/globals");
-        }
+        tsconfig.addToArray("compilerOptions.types", "vitest/globals");
     }
 
     private isTypescriptProject(): boolean {

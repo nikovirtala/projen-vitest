@@ -145,14 +145,8 @@ public configureEnvironment(environment: Environment): void
 ##### `configureGlobals` <a name="configureGlobals" id="@nikovirtala/projen-vitest.Vitest.configureGlobals"></a>
 
 ```typescript
-public configureGlobals(globals: boolean): void
+public configureGlobals(): void
 ```
-
-###### `globals`<sup>Required</sup> <a name="globals" id="@nikovirtala/projen-vitest.Vitest.configureGlobals.parameter.globals"></a>
-
-- *Type:* boolean
-
----
 
 #### Static Functions <a name="Static Functions" id="Static Functions"></a>
 
