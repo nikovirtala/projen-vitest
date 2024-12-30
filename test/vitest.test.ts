@@ -1,6 +1,7 @@
 import { JsonFile } from "projen/lib/json";
 import { TypeScriptProject } from "projen/lib/typescript";
 import { synthSnapshot } from "projen/lib/util/synth";
+import { configDefaults } from "vitest/config";
 import { Vitest, Environment, CoverageProvider, CoverageReporter, Pool } from "../src";
 
 describe("jest", () => {
@@ -35,13 +36,38 @@ describe("vitest", () => {
 
         const snapshot = synthSnapshot(project);
 
-        expect(snapshot["vitest.config.ts"]).toBeDefined();
+        // Package dependencies & tasks
         expect(snapshot["package.json"].devDependencies.vitest).toBe("^2");
         expect(snapshot["package.json"].devDependencies["@vitest/coverage-v8"]).toBe("^2");
-        expect(snapshot["vitest.config.ts"]).toContain("update: true");
         expect(snapshot["package.json"].scripts["test:update"]).toBe("npx projen test:update");
-        expect(snapshot["vitest.config.ts"]).toContain("printConsoleTrace: true");
-        expect(snapshot["vitest.config.ts"]).toContain("slowTestThreshold: 300");
+        expect(snapshot["package.json"].scripts["test:watch"]).toBe("npx projen test:watch");
+
+        const config = snapshot["vitest.config.ts"];
+        // Coverage config
+        expect(config).toContain("    coverage: {\n      enabled: true,");
+        expect(config).toContain('      provider: "v8",\n');
+        expect(config).toContain('      reporter: ["text","lcov"],\n');
+        expect(config).toContain('      reportsDirectory: "coverage",\n');
+
+        // Typecheck config
+        expect(config).toContain("    typecheck: {\n      enabled: true,");
+        expect(config).toContain('      checker: "tsc --noEmit",\n');
+        expect(config).toContain('      tsconfig: "tsconfig.dev.json",\n');
+
+        // Root level config
+        expect(config).toContain("    bail: 0,\n");
+        expect(config).toContain('    environment: "node",\n');
+        expect(config).toContain("    globals: false,\n");
+        expect(config).toContain("    isolate: true,\n");
+        expect(config).toContain("    passWithNoTests: true,\n");
+        expect(config).toContain("    printConsoleTrace: true,\n");
+        expect(config).toContain('    pool: "forks",\n');
+        expect(config).toContain("    slowTestThreshold: 300,\n");
+        expect(config).toContain("    update: true,\n");
+
+        // Include/exclude patterns
+        expect(config).toContain(`    include: ${JSON.stringify(configDefaults.include)},\n`);
+        expect(config).toContain(`    exclude: ${JSON.stringify([...configDefaults.exclude])},\n`);
     });
 
     test("custom environment", () => {

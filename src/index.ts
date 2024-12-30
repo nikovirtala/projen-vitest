@@ -461,8 +461,8 @@ export class Vitest extends Component {
         lines.push(`    pool: "${this.pool}",`);
         lines.push(`    slowTestThreshold: ${this.slowTestThreshold},`);
         lines.push("    typecheck: {");
-        lines.push(`      checker: "${this.typecheckChecker}",`);
         lines.push(`      enabled: ${this.typecheckEnabled},`);
+        lines.push(`      checker: "${this.typecheckChecker}",`);
         lines.push(`      tsconfig: "${this.typecheckTsconfig}",`);
         lines.push("    },");
         lines.push(`    update: ${this.updateSnapshots},`);
