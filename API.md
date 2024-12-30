@@ -44,6 +44,7 @@ new Vitest(project: NodeProject, options?: VitestOptions)
 | <code><a href="#@nikovirtala/projen-vitest.Vitest.configureCoverageProvider">configureCoverageProvider</a></code> | *No description.* |
 | <code><a href="#@nikovirtala/projen-vitest.Vitest.configureCoverageReporters">configureCoverageReporters</a></code> | *No description.* |
 | <code><a href="#@nikovirtala/projen-vitest.Vitest.configureEnvironment">configureEnvironment</a></code> | *No description.* |
+| <code><a href="#@nikovirtala/projen-vitest.Vitest.configureGlobals">configureGlobals</a></code> | *No description.* |
 
 ---
 
@@ -138,6 +139,18 @@ public configureEnvironment(environment: Environment): void
 ###### `environment`<sup>Required</sup> <a name="environment" id="@nikovirtala/projen-vitest.Vitest.configureEnvironment.parameter.environment"></a>
 
 - *Type:* <a href="#@nikovirtala/projen-vitest.Environment">Environment</a>
+
+---
+
+##### `configureGlobals` <a name="configureGlobals" id="@nikovirtala/projen-vitest.Vitest.configureGlobals"></a>
+
+```typescript
+public configureGlobals(globals: boolean): void
+```
+
+###### `globals`<sup>Required</sup> <a name="globals" id="@nikovirtala/projen-vitest.Vitest.configureGlobals.parameter.globals"></a>
+
+- *Type:* boolean
 
 ---
 
@@ -486,7 +499,7 @@ public readonly typecheckEnabled: boolean;
 ```
 
 - *Type:* boolean
-- *Default:* true
+- *Default:* true (for TypeScript projects)
 
 Enable typechecking alongside your regular tests.
 

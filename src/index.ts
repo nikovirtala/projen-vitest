@@ -188,7 +188,7 @@ export interface VitestConfigOptions {
     /**
      * Enable typechecking alongside your regular tests. https://vitest.dev/config/#typecheck-enabled
      *
-     * @default true
+     * @default true (for TypeScript projects)
      */
     readonly typecheckEnabled?: boolean;
 
@@ -281,7 +281,7 @@ export class Vitest extends Component {
         this.isolate = options.config?.isolate ?? true;
         this.pool = options.config?.pool ?? Pool.FORKS;
         this.coverageEnabled = options.config?.coverageEnabled ?? true;
-        this.typecheckEnabled = options.config?.typecheckEnabled ?? true;
+        this.typecheckEnabled = options.config?.typecheckEnabled ?? this.isTypescriptProject();
         this.typecheckChecker = options.config?.typecheckChecker ?? "tsc --noEmit";
         this.typecheckTsconfig = options.config?.typecheckTsconfig ?? "tsconfig.dev.json";
         this.passWithNoTests = options.config?.passWithNoTests ?? true;
@@ -296,6 +296,7 @@ export class Vitest extends Component {
         project.addDevDeps(`vitest@${this.version}`);
 
         this.configureCoverageProvider(this.coverageProvider);
+        this.updateTsConfig(this.globals);
         this.addTestCommand();
         this.synthesizeConfig();
     }
@@ -340,6 +341,32 @@ export class Vitest extends Component {
     public configureCoverageReporters(reporters: Array<CoverageReporter>): void {
         this.coverageReporters = reporters;
         this.synthesizeConfig();
+    }
+
+    public configureGlobals(globals: boolean): void {
+        this.globals = globals;
+        this.updateTsConfig(globals);
+        this.synthesizeConfig();
+    }
+
+    private updateTsConfig(globals: boolean): void {
+        if (!this.isTypescriptProject()) {
+            return;
+        }
+
+        const tsconfig = this.project.tryFindObjectFile(this.typecheckTsconfig);
+
+        if (!tsconfig) {
+            throw new Error("unable to find tsconfig");
+        }
+
+        if (globals) {
+            tsconfig.addToArray("compilerOptions.types", "vitest/globals");
+        }
+    }
+
+    private isTypescriptProject(): boolean {
+        return this.project.deps.tryGetDependency("typescript") !== undefined;
     }
 
     private addTestCommand(): void {

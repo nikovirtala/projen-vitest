@@ -1,10 +1,11 @@
-import { NodeProject } from "projen/lib/javascript";
+import { JsonFile } from "projen/lib/json";
+import { TypeScriptProject } from "projen/lib/typescript";
 import { synthSnapshot } from "projen/lib/util/synth";
 import { Vitest, Environment, CoverageProvider, CoverageReporter, Pool } from "../src";
 
 describe("jest", () => {
     test("throws when jest is enabled", () => {
-        const project = new NodeProject({
+        const project = new TypeScriptProject({
             name: "test-node-project",
             mergify: false,
             projenDevDependency: false,
@@ -17,10 +18,10 @@ describe("jest", () => {
 });
 
 describe("vitest", () => {
-    let project: NodeProject;
+    let project: TypeScriptProject;
 
     beforeEach(() => {
-        project = new NodeProject({
+        project = new TypeScriptProject({
             name: "test-node-project",
             mergify: false,
             projenDevDependency: false,
@@ -90,6 +91,15 @@ describe("vitest", () => {
     });
 
     test("initialize with custom options", () => {
+        new JsonFile(project, "tsconfig.custom.json", {
+            obj: {
+                compilerOptions: {
+                    types: [],
+                },
+            },
+            readonly: false,
+        });
+
         new Vitest(project, {
             configFilePath: "custom.vitest.config.ts",
             vitestVersion: "^3",
@@ -129,6 +139,42 @@ describe("vitest", () => {
         expect(snapshot["custom.vitest.config.ts"]).toContain('"**/*.spec.js"');
         expect(snapshot["custom.vitest.config.ts"]).toContain("bail: 5");
         expect(snapshot["package.json"].devDependencies.vitest).toBe("^3");
+    });
+
+    describe("globals", () => {
+        test("adds vitest/globals to tsconfig when globals enabled", () => {
+            new Vitest(project, {
+                config: {
+                    globals: true,
+                },
+            });
+
+            const snapshot = synthSnapshot(project);
+            expect(snapshot["tsconfig.dev.json"].compilerOptions.types).toContain("vitest/globals");
+        });
+
+        test("does not add vitest/globals to tsconfig when globals disabled", () => {
+            new Vitest(project);
+
+            const snapshot = synthSnapshot(project);
+            expect(snapshot["tsconfig.dev.json"].compilerOptions.types || []).not.toContain("vitest/globals");
+        });
+
+        test("updates tsconfig when globals configuration changes (false --> true)", () => {
+            const vitest = new Vitest(project);
+
+            vitest.configureGlobals(true);
+            const snapshot = synthSnapshot(project);
+            expect(snapshot["tsconfig.dev.json"].compilerOptions.types).toContain("vitest/globals");
+        });
+
+        test("updates tsconfig when globals configuration changes (true --> false)", () => {
+            const vitest = new Vitest(project);
+
+            vitest.configureGlobals(false);
+            const snapshot = synthSnapshot(project);
+            expect(snapshot["tsconfig.dev.json"].compilerOptions.types || []).not.toContain("vitest/globals");
+        });
     });
 
     describe("of", () => {
