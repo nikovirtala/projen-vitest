@@ -40,6 +40,7 @@ describe("vitest", () => {
         expect(snapshot["package.json"].devDependencies["@vitest/coverage-v8"]).toBe("^2");
         expect(snapshot["vitest.config.ts"]).toContain("update: true");
         expect(snapshot["package.json"].scripts["test:update"]).toBe("npx projen test:update");
+        expect(snapshot["vitest.config.ts"]).toContain("printConsoleTrace: true");
     });
 
     test("custom environment", () => {
@@ -122,6 +123,7 @@ describe("vitest", () => {
                 passWithNoTests: false,
                 bail: 5,
                 updateSnapshots: false,
+                printConsoleTrace: false,
             },
         });
 
@@ -142,6 +144,7 @@ describe("vitest", () => {
         expect(snapshot["custom.vitest.config.ts"]).toContain('"**/*.spec.js"');
         expect(snapshot["custom.vitest.config.ts"]).toContain("bail: 5");
         expect(snapshot["custom.vitest.config.ts"]).toContain("update: false");
+        expect(snapshot["custom.vitest.config.ts"]).toContain("printConsoleTrace: false");
         expect(snapshot["package.json"].devDependencies.vitest).toBe("^3");
     });
 

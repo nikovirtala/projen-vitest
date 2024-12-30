@@ -229,6 +229,13 @@ export interface VitestConfigOptions {
      * @default true
      */
     readonly updateSnapshots?: boolean;
+
+    /**
+     * Always print console traces when calling any console method. https://vitest.dev/config/#consoletrace
+     *
+     * @default true
+     */
+    readonly printConsoleTrace?: boolean;
 }
 
 export interface VitestOptions {
@@ -276,6 +283,7 @@ export class Vitest extends Component {
     private coverageReporters: Array<CoverageReporter>;
     private coverageDirectory: string;
     private version: string;
+    private readonly printConsoleTrace: boolean;
 
     constructor(project: NodeProject, options: VitestOptions = {}) {
         super(project);
@@ -302,6 +310,7 @@ export class Vitest extends Component {
         this.coverageDirectory = options.config?.coverageDirectory ?? "coverage";
         this.version = options.vitestVersion ?? "^2";
         this.updateSnapshots = options.config?.updateSnapshots ?? true;
+        this.printConsoleTrace = options.config?.printConsoleTrace ?? true;
 
         project.addDevDeps(`vitest@${this.version}`);
 
@@ -438,6 +447,7 @@ export class Vitest extends Component {
         lines.push(`    include: ${JSON.stringify(Array.from(this.include))},`);
         lines.push(`    isolate: ${this.isolate},`);
         lines.push(`    passWithNoTests: ${this.passWithNoTests},`);
+        lines.push(`    printConsoleTrace: ${this.printConsoleTrace},`);
         lines.push(`    pool: "${this.pool}",`);
         lines.push("    typecheck: {");
         lines.push(`      checker: "${this.typecheckChecker}",`);
