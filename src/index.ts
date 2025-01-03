@@ -433,7 +433,7 @@ export class Vitest extends Component {
         // oh dear!
         this.project.tryRemoveFile(this.configFilePath);
 
-        new TextFile(this.project, this.configFilePath, {
+        new TextFile(this, this.configFilePath, {
             lines: this.renderConfig(),
         });
     }
