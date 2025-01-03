@@ -298,10 +298,6 @@ export class Vitest extends Component {
     constructor(project: NodeProject, options: VitestOptions = {}) {
         super(project);
 
-        for (const component of this.project.components) {
-            if (component instanceof Jest) throw new Error("vitest cannot be used together with jest");
-        }
-
         this.configFilePath = options.configFilePath ?? "vitest.config.ts";
         this.include = new Set(options.config?.include ?? [...configDefaults.include]);
         this.exclude = new Set(options.config?.exclude ?? [...configDefaults.exclude]);
@@ -336,6 +332,16 @@ export class Vitest extends Component {
 
         this.addTestCommand();
         this.synthesizeConfig();
+    }
+
+    public override preSynthesize() {
+        super.preSynthesize();
+
+        for (const component of this.project.components) {
+            if (component instanceof Jest) {
+                throw new Error("vitest cannot be used together with jest");
+            }
+        }
     }
 
     public addInclude(pattern: string): void {

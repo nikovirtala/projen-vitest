@@ -1,3 +1,4 @@
+import { Jest } from "projen/lib/javascript";
 import { JsonFile } from "projen/lib/json";
 import { TypeScriptProject } from "projen/lib/typescript";
 import { synthSnapshot } from "projen/lib/util/synth";
@@ -15,7 +16,22 @@ describe("jest", () => {
             jest: true,
         });
 
-        expect(() => new Vitest(project)).toThrow("vitest cannot be used together with jest");
+        new Vitest(project);
+        expect(() => synthSnapshot(project)).toThrow("vitest cannot be used together with jest");
+    });
+
+    test("throws when jest is added after vitest", () => {
+        const project = new TypeScriptProject({
+            name: "test-node-project",
+            mergify: false,
+            projenDevDependency: false,
+            defaultReleaseBranch: "main",
+            jest: false,
+        });
+
+        new Vitest(project);
+        new Jest(project);
+        expect(() => synthSnapshot(project)).toThrow("vitest cannot be used together with jest");
     });
 });
 
