@@ -211,12 +211,12 @@ Test whether the given construct is a component.
 ```typescript
 import { Vitest } from '@nikovirtala/projen-vitest'
 
-Vitest.of(project: Project)
+Vitest.of(project: NodeProject)
 ```
 
 ###### `project`<sup>Required</sup> <a name="project" id="@nikovirtala/projen-vitest.Vitest.of.parameter.project"></a>
 
-- *Type:* projen.Project
+- *Type:* projen.javascript.NodeProject
 
 ---
 

@@ -56,7 +56,16 @@ project.eslint?.addOverride({
 
 project.npmrc.addConfig("node-linker", "hoisted");
 
+project.addDevDeps("esbuild");
+project.defaultTask?.spawn(
+    project.addTask("bundle-define-config", {
+        exec: "ts-node --project tsconfig.dev.json src/bundle-define-config.ts",
+    }),
+);
+
+project.addDevDeps("vitest");
 new Vitest(project);
+project.npmignore?.addPatterns("/vitest.config.ts");
 
 project.vscode?.extensions.addRecommendations("dbaeumer.vscode-eslint", "esbenp.prettier-vscode");
 
@@ -74,5 +83,6 @@ new TextFile(project, ".nvmrc", {
     readonly: true,
     lines: ["v" + nodeVersion],
 });
+project.npmignore?.addPatterns("/.nvmrc");
 
 project.synth();

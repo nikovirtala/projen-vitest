@@ -8,6 +8,7 @@
   "scripts": {
     "build": "npx projen build",
     "bump": "npx projen bump",
+    "bundle-define-config": "npx projen bundle-define-config",
     "clobber": "npx projen clobber",
     "compat": "npx projen compat",
     "compile": "npx projen compile",
@@ -42,6 +43,7 @@
     "@vitest/coverage-v8": "^2",
     "commit-and-tag-version": "^12",
     "constructs": "^10.4.2",
+    "esbuild": "^0.21.5",
     "eslint": "^9",
     "eslint-config-prettier": "^9.1.0",
     "eslint-import-resolver-typescript": "^3.7.0",

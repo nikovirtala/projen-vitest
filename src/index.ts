@@ -2,7 +2,6 @@ import * as path from "path";
 import { Component } from "projen/lib/component";
 import { DependencyType } from "projen/lib/dependencies";
 import { Jest, NodeProject } from "projen/lib/javascript";
-import { Project } from "projen/lib/project";
 import { TextFile } from "projen/lib/textfile";
 import { configDefaults } from "vitest/config";
 
@@ -269,7 +268,7 @@ export interface VitestOptions {
 }
 
 export class Vitest extends Component {
-    public static of(project: Project): Vitest | undefined {
+    public static of(project: NodeProject): Vitest | undefined {
         const isVitest = (c: Component): c is Vitest => c instanceof Vitest;
         return project.components.find(isVitest);
     }
@@ -439,8 +438,15 @@ export class Vitest extends Component {
     }
 
     private renderConfig(): Array<string> {
+        const project = this.project as NodeProject;
+        const packageName = project.package.packageName;
+        const defineConfigImport =
+            packageName === "@nikovirtala/projen-vitest"
+                ? 'import { defineConfig } from "vitest/config";'
+                : 'import { defineConfig } from "@nikovirtala/projen-vitest/lib/bundled-define-config";';
+
         return [
-            'import { configDefaults, defineConfig } from "vitest/config";',
+            defineConfigImport,
             "",
             "export default defineConfig({",
             "  test: {",

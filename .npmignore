@@ -22,6 +22,8 @@ tsconfig.tsbuildinfo
 /.eslintrc.json
 !.jsii
 /coverage/
+/vitest.config.ts
+/.nvmrc
 /.gitattributes
 /.projenrc.ts
 /projenrc

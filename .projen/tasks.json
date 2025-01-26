@@ -42,6 +42,14 @@
       ],
       "condition": "git log --oneline -1 | grep -qv \"chore(release):\""
     },
+    "bundle-define-config": {
+      "name": "bundle-define-config",
+      "steps": [
+        {
+          "exec": "ts-node --project tsconfig.dev.json src/bundle-define-config.ts"
+        }
+      ]
+    },
     "clobber": {
       "name": "clobber",
       "description": "hard resets to HEAD of origin and cleans the local repo",
@@ -98,6 +106,9 @@
       "steps": [
         {
           "exec": "ts-node --project tsconfig.dev.json .projenrc.ts"
+        },
+        {
+          "spawn": "bundle-define-config"
         }
       ]
     },
@@ -283,13 +294,13 @@
       },
       "steps": [
         {
-          "exec": "pnpm dlx npm-check-updates@16 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=eslint-config-prettier,eslint-import-resolver-typescript,eslint-plugin-import,eslint-plugin-prettier,jsii-diff,jsii-pacmak,prettier,projen,ts-node,constructs"
+          "exec": "pnpm dlx npm-check-updates@16 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=esbuild,eslint-config-prettier,eslint-import-resolver-typescript,eslint-plugin-import,eslint-plugin-prettier,jsii-diff,jsii-pacmak,prettier,projen,ts-node,constructs"
         },
         {
           "exec": "pnpm i --no-frozen-lockfile"
         },
         {
-          "exec": "pnpm update @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser commit-and-tag-version constructs eslint-config-prettier eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-prettier eslint jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii prettier projen ts-node typescript vitest @vitest/coverage-v8"
+          "exec": "pnpm update @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser commit-and-tag-version constructs esbuild eslint-config-prettier eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-prettier eslint jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii prettier projen ts-node typescript vitest @vitest/coverage-v8"
         },
         {
           "exec": "npx projen"
