@@ -3,7 +3,6 @@ import { Component } from "projen/lib/component";
 import { DependencyType } from "projen/lib/dependencies";
 import { Jest, NodeProject } from "projen/lib/javascript";
 import { TextFile } from "projen/lib/textfile";
-import { configDefaults } from "vitest/config";
 
 export enum Environment {
     /**
@@ -298,8 +297,16 @@ export class Vitest extends Component {
         super(project);
 
         this.configFilePath = options.configFilePath ?? "vitest.config.ts";
-        this.include = new Set(options.config?.include ?? [...configDefaults.include]);
-        this.exclude = new Set(options.config?.exclude ?? [...configDefaults.exclude]);
+        this.include = new Set(options.config?.include ?? ["**/*.{test,spec}.?(c|m)[jt]s?(x)"]);
+        this.exclude = new Set(
+            options.config?.exclude ?? [
+                "**/node_modules/**",
+                "**/dist/**",
+                "**/cypress/**",
+                "**/.{idea,git,cache,output,temp}/**",
+                "**/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,cypress,tsup,build,eslint,prettier}.config.*",
+            ],
+        );
         this.isolate = options.config?.isolate ?? true;
         this.pool = options.config?.pool ?? Pool.FORKS;
         this.coverageEnabled = options.config?.coverageEnabled ?? true;
