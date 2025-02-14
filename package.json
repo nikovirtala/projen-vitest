@@ -54,18 +54,18 @@
     "jsii-docgen": "^10.5.0",
     "jsii-pacmak": "^1.106.0",
     "jsii-rosetta": "~5.7.0",
-    "prettier": "^3.5.0",
-    "projen": "^0.91.9",
+    "prettier": "^3.5.1",
+    "projen": "^0.91.10",
     "ts-node": "^10.9.2",
     "typescript": "5.7.2",
     "vitest": "^2"
   },
   "peerDependencies": {
     "constructs": "^10.4.2",
-    "projen": "^0.91.9"
+    "projen": "^0.91.10"
   },
   "dependencies": {
-    "projen": "^0.91.9"
+    "projen": "^0.91.10"
   },
   "pnpm": {},
   "engines": {
