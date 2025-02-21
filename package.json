@@ -46,26 +46,26 @@
     "esbuild": "^0.25.0",
     "eslint": "^9",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-import-resolver-typescript": "^3.8.2",
+    "eslint-import-resolver-typescript": "^3.8.3",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-prettier": "^5.2.3",
     "jsii": "~5.7.0",
-    "jsii-diff": "^1.106.0",
+    "jsii-diff": "^1.107.0",
     "jsii-docgen": "^10.5.0",
-    "jsii-pacmak": "^1.106.0",
+    "jsii-pacmak": "^1.107.0",
     "jsii-rosetta": "~5.7.0",
     "prettier": "^3.5.1",
-    "projen": "^0.91.12",
+    "projen": "^0.91.13",
     "ts-node": "^10.9.2",
     "typescript": "5.7.2",
     "vitest": "^2"
   },
   "peerDependencies": {
     "constructs": "^10.4.2",
-    "projen": "^0.91.12"
+    "projen": "^0.91.13"
   },
   "dependencies": {
-    "projen": "^0.91.12"
+    "projen": "^0.91.13"
   },
   "pnpm": {},
   "engines": {
