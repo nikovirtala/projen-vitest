@@ -55,17 +55,17 @@
     "jsii-pacmak": "^1.109.0",
     "jsii-rosetta": "~5.7.0",
     "prettier": "^3.5.3",
-    "projen": "^0.91.14",
+    "projen": "^0.91.16",
     "ts-node": "^10.9.2",
     "typescript": "5.7.2",
     "vitest": "^2"
   },
   "peerDependencies": {
     "constructs": "^10.4.2",
-    "projen": "^0.91.14"
+    "projen": "^0.91.16"
   },
   "dependencies": {
-    "projen": "^0.91.14"
+    "projen": "^0.91.16"
   },
   "pnpm": {},
   "engines": {
