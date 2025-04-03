@@ -25,7 +25,7 @@ const project = new cdk.JsiiProject({
     jsiiVersion: "~5.8.2",
     license: "MIT",
     licensed: true,
-    majorVersion: 1,
+    majorVersion: 2,
     minNodeVersion: nodeVersion,
     name: "projen-vitest",
     npmAccess: javascript.NpmAccess.PUBLIC,

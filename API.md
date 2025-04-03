@@ -617,7 +617,7 @@ public readonly vitestVersion: string;
 ```
 
 - *Type:* string
-- *Default:* "^2"
+- *Default:* "^3"
 
 Vitest version.
 

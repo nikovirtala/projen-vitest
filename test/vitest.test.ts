@@ -54,8 +54,8 @@ describe("vitest", () => {
         const snapshot = synthSnapshot(project);
 
         // Package dependencies & tasks
-        expect(snapshot["package.json"].devDependencies.vitest).toBe("^2");
-        expect(snapshot["package.json"].devDependencies["@vitest/coverage-v8"]).toBe("^2");
+        expect(snapshot["package.json"].devDependencies.vitest).toBe("^3");
+        expect(snapshot["package.json"].devDependencies["@vitest/coverage-v8"]).toBe("^3");
         expect(snapshot["package.json"].scripts["test:update"]).toBe("npx projen test:update");
         expect(snapshot["package.json"].scripts["test:watch"]).toBe("npx projen test:watch");
 
@@ -102,7 +102,7 @@ describe("vitest", () => {
         const snapshot = synthSnapshot(project);
 
         expect(snapshot["vitest.config.ts"]).toContain('provider: "istanbul"');
-        expect(snapshot["package.json"].devDependencies["@vitest/coverage-istanbul"]).toBe("^2");
+        expect(snapshot["package.json"].devDependencies["@vitest/coverage-istanbul"]).toBe("^3");
     });
 
     test("custom coverage reporters", () => {
