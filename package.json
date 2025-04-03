@@ -69,7 +69,7 @@
   },
   "pnpm": {},
   "engines": {
-    "node": ">= 22.12.0"
+    "node": ">= 22.14.0"
   },
   "main": "lib/index.js",
   "license": "MIT",
