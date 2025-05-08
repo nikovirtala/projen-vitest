@@ -1,7 +1,7 @@
 import { cdk, javascript, TextFile } from "projen";
 import { Vitest } from "./src";
 
-const nodeVersion = "22.14.0";
+const nodeVersion = "22.15.0";
 
 const project = new cdk.JsiiProject({
     author: "Niko Virtala",
