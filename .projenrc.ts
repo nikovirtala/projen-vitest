@@ -22,7 +22,7 @@ const project = new cdk.JsiiProject({
     mergify: true,
     autoMerge: true,
     jest: false,
-    jsiiVersion: "~5.8.2",
+    jsiiVersion: "~5.8.3",
     license: "MIT",
     licensed: true,
     majorVersion: 2,
@@ -44,7 +44,7 @@ const project = new cdk.JsiiProject({
     projenrcTs: true,
     releaseToNpm: true,
     repositoryUrl: "https://github.com/nikovirtala/projen-vitest.git",
-    typescriptVersion: "5.8.2",
+    typescriptVersion: "5.8.3",
 });
 
 project.eslint?.addOverride({

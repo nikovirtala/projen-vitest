@@ -49,15 +49,15 @@
     "eslint-import-resolver-typescript": "^3.10.1",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-prettier": "^5.4.0",
-    "jsii": "~5.8.2",
+    "jsii": "~5.8.3",
     "jsii-diff": "^1.112.0",
     "jsii-docgen": "^10.5.0",
     "jsii-pacmak": "^1.112.0",
-    "jsii-rosetta": "~5.8.2",
+    "jsii-rosetta": "~5.8.3",
     "prettier": "^3.5.3",
     "projen": "^0.92.0",
     "ts-node": "^10.9.2",
-    "typescript": "5.8.2",
+    "typescript": "5.8.3",
     "vitest": "^3"
   },
   "peerDependencies": {
