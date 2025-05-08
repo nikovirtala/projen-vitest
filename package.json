@@ -50,22 +50,22 @@
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-prettier": "^5.4.0",
     "jsii": "~5.8.2",
-    "jsii-diff": "^1.111.0",
+    "jsii-diff": "^1.112.0",
     "jsii-docgen": "^10.5.0",
-    "jsii-pacmak": "^1.111.0",
+    "jsii-pacmak": "^1.112.0",
     "jsii-rosetta": "~5.8.2",
     "prettier": "^3.5.3",
-    "projen": "^0.91.30",
+    "projen": "^0.92.0",
     "ts-node": "^10.9.2",
     "typescript": "5.8.2",
     "vitest": "^3"
   },
   "peerDependencies": {
     "constructs": "^10.4.2",
-    "projen": "^0.91.30"
+    "projen": "^0.92.0"
   },
   "dependencies": {
-    "projen": "^0.91.30"
+    "projen": "^0.92.0"
   },
   "pnpm": {},
   "engines": {
