@@ -32,7 +32,7 @@ const project = new cdk.JsiiProject({
     packageManager: javascript.NodePackageManager.PNPM,
     packageName: "@nikovirtala/projen-vitest",
     peerDeps: ["projen", "constructs"],
-    pnpmVersion: "9",
+    pnpmVersion: "10",
     prettier: true,
     prettierOptions: {
         settings: {
