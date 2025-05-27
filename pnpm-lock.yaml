@@ -50,7 +50,7 @@ importers:
         version: 5.4.0(eslint-config-prettier@9.1.0(eslint@9.27.0))(eslint@9.27.0)(prettier@3.5.3)
       jsii:
         specifier: ~5.8.3
-        version: 5.8.9
+        version: 5.8.10
       jsii-diff:
         specifier: ^1.112.0
         version: 1.112.0
@@ -1937,8 +1937,8 @@ packages:
     engines: {node: '>= 18.12.0'}
     hasBin: true
 
-  jsii@5.8.9:
-    resolution: {integrity: sha512-TxdbK33FUEatwVQh2Kls7i+v2QAlPZPopdePMZ89xePFLIwmUKhEPuPQSPHnFwdMe43cBOqa1Oh68yDQHvKNug==}
+  jsii@5.8.10:
+    resolution: {integrity: sha512-6rpXNvtUa+NUfI3efkPkJ1HXnNAlPzLu30jIckLdZLTXj91h4XZbXmGxnyCckhKYSuDHDUV932Ag/r16yQD51g==}
     engines: {node: '>= 18.12.0'}
     hasBin: true
 
@@ -4882,7 +4882,7 @@ snapshots:
       chalk: 4.1.2
       commonmark: 0.31.2
       fast-glob: 3.3.3
-      jsii: 5.8.9
+      jsii: 5.8.10
       semver: 7.7.2
       semver-intersect: 1.5.0
       stream-json: 1.9.1
@@ -4892,7 +4892,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  jsii@5.8.9:
+  jsii@5.8.10:
     dependencies:
       '@jsii/check-node': 1.112.0
       '@jsii/spec': 1.112.0
