@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       projen:
-        specifier: ^0.95.0
-        version: 0.95.0(constructs@10.4.2)
+        specifier: ^0.95.1
+        version: 0.95.1(constructs@10.4.2)
     devDependencies:
       '@types/node':
         specifier: ^22
@@ -46,8 +46,8 @@ importers:
         specifier: ^2.32.0
         version: 2.32.0(@typescript-eslint/parser@8.39.0(eslint@9.32.0)(typescript@5.8.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.32.0)
       eslint-plugin-prettier:
-        specifier: ^5.5.3
-        version: 5.5.3(eslint-config-prettier@9.1.2(eslint@9.32.0))(eslint@9.32.0)(prettier@3.6.2)
+        specifier: ^5.5.4
+        version: 5.5.4(eslint-config-prettier@9.1.2(eslint@9.32.0))(eslint@9.32.0)(prettier@3.6.2)
       jsii:
         specifier: ~5.8.3
         version: 5.8.17
@@ -1318,8 +1318,8 @@ packages:
       '@typescript-eslint/parser':
         optional: true
 
-  eslint-plugin-prettier@5.5.3:
-    resolution: {integrity: sha512-NAdMYww51ehKfDyDhv59/eIItUVzU0Io9H2E8nHNGKEeeqlnci+1gCvrHib6EmZdf6GxF+LCV5K7UC65Ezvw7w==}
+  eslint-plugin-prettier@5.5.4:
+    resolution: {integrity: sha512-swNtI95SToIz05YINMA6Ox5R057IMAmWZ26GqPxusAp1TZzj+IdY9tXNWWD3vkF/wEqydCONcwjTFpxybBqZsg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
       '@types/eslint': '>=8.0.0'
@@ -2233,8 +2233,8 @@ packages:
   process-nextick-args@2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
 
-  projen@0.95.0:
-    resolution: {integrity: sha512-Ytqk+9tVNccwGs7oD35cHEumCdHTDCSOQkpfl4Ok/hmDDFT+l2YzOPWOytL3Uh6F69wHPotRA0nXv7EyV5Gw+A==}
+  projen@0.95.1:
+    resolution: {integrity: sha512-4s+18CqLzG6WWgWJ9VQO5s77D8XYyWbQk5OSgNWEYo3RDKFn/HEf1pnRmFkbR4/vlubcFYncUrHg7wcToKIWRg==}
     engines: {node: '>= 16.0.0'}
     hasBin: true
     peerDependencies:
@@ -4177,7 +4177,7 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
-  eslint-plugin-prettier@5.5.3(eslint-config-prettier@9.1.2(eslint@9.32.0))(eslint@9.32.0)(prettier@3.6.2):
+  eslint-plugin-prettier@5.5.4(eslint-config-prettier@9.1.2(eslint@9.32.0))(eslint@9.32.0)(prettier@3.6.2):
     dependencies:
       eslint: 9.32.0
       prettier: 3.6.2
@@ -5188,7 +5188,7 @@ snapshots:
 
   process-nextick-args@2.0.1: {}
 
-  projen@0.95.0(constructs@10.4.2):
+  projen@0.95.1(constructs@10.4.2):
     dependencies:
       constructs: 10.4.2
 
