@@ -50,13 +50,13 @@ importers:
         version: 5.5.4(eslint-config-prettier@9.1.2(eslint@9.36.0))(eslint@9.36.0)(prettier@3.6.2)
       jsii:
         specifier: ~5.8.3
-        version: 5.8.18
+        version: 5.8.19
       jsii-diff:
         specifier: ^1.114.1
         version: 1.114.1
       jsii-docgen:
         specifier: ^10.5.0
-        version: 10.8.3(jsii-rosetta@5.8.16)
+        version: 10.9.0(jsii-rosetta@5.8.16)
       jsii-pacmak:
         specifier: ^1.114.1
         version: 1.114.1(jsii-rosetta@5.8.16)
@@ -1856,8 +1856,8 @@ packages:
     engines: {node: '>= 14.17.0'}
     hasBin: true
 
-  jsii-docgen@10.8.3:
-    resolution: {integrity: sha512-ktyhpNNQvoBEm3246+YxJTQ2HPx2k/NQcFqHn906xXiUvKssx+obnUFpJzN9Da8nPqhgYswl6qSryWnDiSFs4Q==}
+  jsii-docgen@10.9.0:
+    resolution: {integrity: sha512-ULpavB0/0pZJC5sflF2aMC1BrsWcYaOFLR6lOELI+vTuV1hiZIhyg9RtQMSpHAewPb2qfevj0Es12wipwWmBBg==}
     hasBin: true
     peerDependencies:
       jsii-rosetta: ^1.85.0 || ~5.0.14 || ~5.1.2 || ~5.2.0 || ~5.3.0 || ~5.4.0 || ~5.5.0 || ~5.6.0 || ~5.7.0 || ~5.8.0 || ~5.9.1
@@ -1879,8 +1879,8 @@ packages:
     engines: {node: '>= 18.12.0'}
     hasBin: true
 
-  jsii@5.8.18:
-    resolution: {integrity: sha512-MG0VdBNAfIPl481J0hhDIwg/AVnUhLI0Y7IcsFqFaMQAEGm1op16EfMZJkNLqENqfW1sACtn1MG++hueYEg2Fw==}
+  jsii@5.8.19:
+    resolution: {integrity: sha512-oiRfmxXFzWY3kJSvO4pC3iery1z8It3IyZw6PAR4eT1Gs4ImcfvtVQ9zDvGDy4seRmXuqve0PbsMV4+KpmodIQ==}
     engines: {node: '>= 18.12.0'}
     hasBin: true
 
@@ -1901,6 +1901,10 @@ packages:
 
   json-stable-stringify-without-jsonify@1.0.1:
     resolution: {integrity: sha512-Bdboy+l7tA3OGW6FjyFHWkP5LuByj1Tk33Ljyq0axyzdk9//JSi2u3fP1QSmd1KNwq6VOKYGlAu87CisVir6Pw==}
+
+  json-stream-stringify@3.1.6:
+    resolution: {integrity: sha512-x7fpwxOkbhFCaJDJ8vb1fBY3DdSa4AlITaz+HHILQJzdPMnHEFjxPwVUi1ALIbcIxDE0PNe/0i7frnY8QnBQog==}
+    engines: {node: '>=7.10.1'}
 
   json-stringify-safe@5.0.1:
     resolution: {integrity: sha512-ZClg6AaYvamvYEE82d3Iyd3vSSIjQ+odgjaTzRuO3s7toCdFKczob2i0zCh7JE8kWn17yvAWhUVxvqGwUalsRA==}
@@ -4788,7 +4792,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  jsii-docgen@10.8.3(jsii-rosetta@5.8.16):
+  jsii-docgen@10.9.0(jsii-rosetta@5.8.16):
     dependencies:
       '@jsii/spec': 1.114.1
       case: 1.6.3
@@ -4797,6 +4801,7 @@ snapshots:
       glob-promise: 6.0.7(glob@8.1.0)
       jsii-reflect: 1.114.1
       jsii-rosetta: 5.8.16
+      json-stream-stringify: 3.1.6
       semver: 7.7.2
       yargs: 16.2.0
 
@@ -4833,7 +4838,7 @@ snapshots:
       chalk: 4.1.2
       commonmark: 0.31.2
       fast-glob: 3.3.3
-      jsii: 5.8.18
+      jsii: 5.8.19
       semver: 7.7.2
       semver-intersect: 1.5.0
       stream-json: 1.9.1
@@ -4843,9 +4848,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  jsii@5.8.18:
+  jsii@5.8.19:
     dependencies:
-      '@jsii/check-node': 1.113.0
+      '@jsii/check-node': 1.114.1
       '@jsii/spec': 1.114.1
       case: 1.6.3
       chalk: 4.1.2
@@ -4871,6 +4876,8 @@ snapshots:
   json-schema-traverse@1.0.0: {}
 
   json-stable-stringify-without-jsonify@1.0.1: {}
+
+  json-stream-stringify@3.1.6: {}
 
   json-stringify-safe@5.0.1: {}
 
