@@ -22,7 +22,7 @@ const project = new cdk.JsiiProject({
     mergify: true,
     autoMerge: true,
     jest: false,
-    jsiiVersion: "~5.8.3",
+    jsiiVersion: "~5.9.0",
     license: "MIT",
     licensed: true,
     majorVersion: 2,
