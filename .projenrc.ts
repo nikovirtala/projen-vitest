@@ -44,7 +44,7 @@ const project = new cdk.JsiiProject({
     projenrcTs: true,
     releaseToNpm: true,
     repositoryUrl: "https://github.com/nikovirtala/projen-vitest.git",
-    typescriptVersion: "5.8.3",
+    typescriptVersion: "5.9.3",
 });
 
 project.eslint?.addOverride({
