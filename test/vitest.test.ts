@@ -54,8 +54,8 @@ describe("vitest", () => {
         const snapshot = synthSnapshot(project);
 
         // Package dependencies & tasks
-        expect(snapshot["package.json"].devDependencies.vitest).toBe("^3");
-        expect(snapshot["package.json"].devDependencies["@vitest/coverage-v8"]).toBe("^3");
+        expect(snapshot["package.json"].devDependencies.vitest).toBe("^4");
+        expect(snapshot["package.json"].devDependencies["@vitest/coverage-v8"]).toBe("^4");
         expect(snapshot["package.json"].scripts["test:update"]).toBe("npx projen test:update");
         expect(snapshot["package.json"].scripts["test:watch"]).toBe("npx projen test:watch");
 
@@ -84,7 +84,9 @@ describe("vitest", () => {
 
         // Include/exclude patterns
         expect(config).toContain(`    include: ${JSON.stringify(configDefaults.include)},\n`);
-        expect(config).toContain(`    exclude: ${JSON.stringify([...configDefaults.exclude])},\n`);
+        expect(config).toContain(
+            '    exclude: ["**/node_modules/**","**/dist/**","**/cypress/**","**/.{idea,git,cache,output,temp}/**","**/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,cypress,tsup,build,eslint,prettier}.config.*"],',
+        );
     });
 
     test("custom environment", () => {
@@ -102,7 +104,7 @@ describe("vitest", () => {
         const snapshot = synthSnapshot(project);
 
         expect(snapshot["vitest.config.ts"]).toContain('provider: "istanbul"');
-        expect(snapshot["package.json"].devDependencies["@vitest/coverage-istanbul"]).toBe("^3");
+        expect(snapshot["package.json"].devDependencies["@vitest/coverage-istanbul"]).toBe("^4");
     });
 
     test("custom coverage reporters", () => {
@@ -149,7 +151,7 @@ describe("vitest", () => {
 
         new Vitest(project, {
             configFilePath: "custom.vitest.config.ts",
-            vitestVersion: "^3",
+            vitestVersion: "^4",
             config: {
                 environment: Environment.HAPPY_DOM,
                 isolate: false,
@@ -191,7 +193,7 @@ describe("vitest", () => {
         expect(snapshot["custom.vitest.config.ts"]).toContain("update: false");
         expect(snapshot["custom.vitest.config.ts"]).toContain("printConsoleTrace: false");
         expect(snapshot["custom.vitest.config.ts"]).toContain("slowTestThreshold: 500");
-        expect(snapshot["package.json"].devDependencies.vitest).toBe("^3");
+        expect(snapshot["package.json"].devDependencies.vitest).toBe("^4");
     });
 
     describe("globals", () => {
