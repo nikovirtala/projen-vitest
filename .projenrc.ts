@@ -43,6 +43,7 @@ const project = new cdk.JsiiProject({
     },
     projenrcTs: true,
     releaseToNpm: true,
+    npmTrustedPublishing: true,
     repositoryUrl: "https://github.com/nikovirtala/projen-vitest.git",
     typescriptVersion: "5.9.3",
 });
