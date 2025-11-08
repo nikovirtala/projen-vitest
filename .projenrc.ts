@@ -1,4 +1,4 @@
-import { cdk, javascript, TextFile } from "projen";
+import { cdk, javascript, JsonPatch, TextFile } from "projen";
 import { Vitest } from "./src";
 
 const nodeVersion = "22.15.0";
@@ -85,5 +85,10 @@ new TextFile(project, ".nvmrc", {
     lines: ["v" + nodeVersion],
 });
 project.npmignore?.addPatterns("/.nvmrc");
+
+// use node.js 24.x to get new enough npm to satisfy: trusted publishing requires npm CLI version 11.5.1 or later.
+project.github
+    ?.tryFindWorkflow("release")
+    ?.file?.patch(JsonPatch.replace("/jobs/release_npm/steps/0/with/node-version", "24.x"));
 
 project.synth();

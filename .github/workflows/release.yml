@@ -99,7 +99,7 @@ jobs:
     steps:
       - uses: actions/setup-node@v5
         with:
-          node-version: 22.15.0
+          node-version: 24.x
       - name: Download build artifacts
         uses: actions/download-artifact@v5
         with:
