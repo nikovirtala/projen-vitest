@@ -1,7 +1,7 @@
-import * as path from "path";
+import * as path from "node:path";
 import { Component } from "projen/lib/component";
 import { DependencyType } from "projen/lib/dependencies";
-import { Jest, NodeProject } from "projen/lib/javascript";
+import { Jest, type NodeProject } from "projen/lib/javascript";
 import { TextFile } from "projen/lib/textfile";
 
 export enum Environment {
