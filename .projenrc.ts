@@ -1,7 +1,7 @@
-import { cdk, javascript, JsonPatch, TextFile } from "projen";
+import { cdk, JsonPatch, javascript, TextFile } from "projen";
 import { Vitest } from "./src";
 
-const nodeVersion = "22.15.0";
+const nodeVersion = "22.21.1";
 
 const project = new cdk.JsiiProject({
     author: "Niko Virtala",
@@ -20,9 +20,9 @@ const project = new cdk.JsiiProject({
         allowedUsernames: ["nikovirtala"],
     },
     mergify: true,
-    autoMerge: true,
+    eslint: false,
     jest: false,
-    jsiiVersion: "~5.9.0",
+    jsiiVersion: "~5.9.3",
     license: "MIT",
     licensed: true,
     majorVersion: 2,
@@ -33,26 +33,25 @@ const project = new cdk.JsiiProject({
     packageName: "@nikovirtala/projen-vitest",
     peerDeps: ["projen", "constructs"],
     pnpmVersion: "10",
-    prettier: true,
-    prettierOptions: {
-        settings: {
-            printWidth: 120,
-            tabWidth: 4,
-            trailingComma: javascript.TrailingComma.ALL,
+    prettier: false,
+    biome: true,
+    biomeOptions: {
+        biomeConfig: {
+            formatter: {
+                indentStyle: javascript.biome_config.IndentStyle.SPACE,
+                indentWidth: 4,
+                lineWidth: 120,
+                useEditorconfig: false,
+            },
         },
+        formatter: true,
+        linter: true,
     },
     projenrcTs: true,
     releaseToNpm: true,
     npmTrustedPublishing: true,
     repositoryUrl: "https://github.com/nikovirtala/projen-vitest.git",
     typescriptVersion: "5.9.3",
-});
-
-project.eslint?.addOverride({
-    files: ["*"],
-    rules: {
-        "import/no-extraneous-dependencies": ["warn"],
-    },
 });
 
 project.npmrc.addConfig("node-linker", "hoisted");
@@ -66,29 +65,30 @@ project.defaultTask?.spawn(
 
 project.addDevDeps("vitest");
 new Vitest(project);
-project.npmignore?.addPatterns("/vitest.config.ts");
 
-project.vscode?.extensions.addRecommendations("dbaeumer.vscode-eslint", "esbenp.prettier-vscode");
+project.vscode?.extensions.addRecommendations("biomejs.biome");
 
 project.vscode?.settings.addSettings({
     "editor.codeActionsOnSave": {
-        "source.fixAll": "explicit",
+        "source.organizeImports.biome": "always",
     },
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "biomejs.biome",
     "editor.formatOnSave": true,
     "editor.tabSize": 4,
 });
 
-new TextFile(project, ".nvmrc", {
+new TextFile(project, "mise.toml", {
     committed: true,
     readonly: true,
-    lines: ["v" + nodeVersion],
+    lines: ["[tools]", `node = "${nodeVersion}"`],
 });
-project.npmignore?.addPatterns("/.nvmrc");
 
 // use node.js 24.x to get new enough npm to satisfy: trusted publishing requires npm CLI version 11.5.1 or later.
 project.github
     ?.tryFindWorkflow("release")
     ?.file?.patch(JsonPatch.replace("/jobs/release_npm/steps/0/with/node-version", "24.x"));
+
+// remove once configured correctly to biome, mise and vitest components
+project.npmignore?.addPatterns("biome.jsonc", "mise.toml", "vitest.config.ts");
 
 project.synth();

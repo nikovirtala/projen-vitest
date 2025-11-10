@@ -4,7 +4,7 @@ import { TypeScriptProject } from "projen/lib/typescript";
 import { synthSnapshot } from "projen/lib/util/synth";
 import { beforeEach, describe, expect, test } from "vitest";
 import { configDefaults } from "vitest/config";
-import { Vitest, Environment, CoverageProvider, CoverageReporter, Pool } from "../src";
+import { CoverageProvider, CoverageReporter, Environment, Pool, Vitest } from "../src";
 
 describe("jest", () => {
     test("throws when jest is enabled", () => {

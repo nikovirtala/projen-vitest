@@ -6,6 +6,7 @@
     "url": "https://github.com/nikovirtala/projen-vitest.git"
   },
   "scripts": {
+    "biome": "npx projen biome",
     "build": "npx projen build",
     "bump": "npx projen bump",
     "bundle-define-config": "npx projen bundle-define-config",
@@ -15,7 +16,6 @@
     "default": "npx projen default",
     "docgen": "npx projen docgen",
     "eject": "npx projen eject",
-    "eslint": "npx projen eslint",
     "package": "npx projen package",
     "package-all": "npx projen package-all",
     "package:js": "npx projen package:js",
@@ -37,24 +37,17 @@
     "organization": false
   },
   "devDependencies": {
+    "@biomejs/biome": "^2",
     "@types/node": "^22",
-    "@typescript-eslint/eslint-plugin": "^8",
-    "@typescript-eslint/parser": "^8",
     "@vitest/coverage-v8": "^4",
     "commit-and-tag-version": "^12",
     "constructs": "^10.4.3",
     "esbuild": "^0.27.0",
-    "eslint": "^9",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-import-resolver-typescript": "^4.4.4",
-    "eslint-plugin-import": "^2.32.0",
-    "eslint-plugin-prettier": "^5.5.4",
-    "jsii": "~5.9.0",
-    "jsii-diff": "^1.118.0",
+    "jsii": "~5.9.3",
+    "jsii-diff": "^1.119.0",
     "jsii-docgen": "^10.5.0",
-    "jsii-pacmak": "^1.118.0",
-    "jsii-rosetta": "~5.9.0",
-    "prettier": "^3.6.2",
+    "jsii-pacmak": "^1.119.0",
+    "jsii-rosetta": "~5.9.3",
     "projen": "^0.98.10",
     "ts-node": "^10.9.2",
     "typescript": "5.9.3",
@@ -69,7 +62,7 @@
   },
   "pnpm": {},
   "engines": {
-    "node": ">= 22.15.0"
+    "node": ">= 22.21.1"
   },
   "main": "lib/index.js",
   "license": "MIT",

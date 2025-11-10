@@ -1,18 +1,13 @@
 {
   "dependencies": [
     {
+      "name": "@biomejs/biome",
+      "version": "^2",
+      "type": "build"
+    },
+    {
       "name": "@types/node",
       "version": "^22",
-      "type": "build"
-    },
-    {
-      "name": "@typescript-eslint/eslint-plugin",
-      "version": "^8",
-      "type": "build"
-    },
-    {
-      "name": "@typescript-eslint/parser",
-      "version": "^8",
       "type": "build"
     },
     {
@@ -30,27 +25,6 @@
       "type": "build"
     },
     {
-      "name": "eslint-config-prettier",
-      "type": "build"
-    },
-    {
-      "name": "eslint-import-resolver-typescript",
-      "type": "build"
-    },
-    {
-      "name": "eslint-plugin-import",
-      "type": "build"
-    },
-    {
-      "name": "eslint-plugin-prettier",
-      "type": "build"
-    },
-    {
-      "name": "eslint",
-      "version": "^9",
-      "type": "build"
-    },
-    {
       "name": "jsii-diff",
       "type": "build"
     },
@@ -65,16 +39,12 @@
     },
     {
       "name": "jsii-rosetta",
-      "version": "~5.9.0",
+      "version": "~5.9.3",
       "type": "build"
     },
     {
       "name": "jsii",
-      "version": "~5.9.0",
-      "type": "build"
-    },
-    {
-      "name": "prettier",
+      "version": "~5.9.3",
       "type": "build"
     },
     {
