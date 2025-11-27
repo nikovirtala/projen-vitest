@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       projen:
-        specifier: ^0.98.25
-        version: 0.98.25(constructs@10.4.3)
+        specifier: ^0.98.26
+        version: 0.98.26(constructs@10.4.3)
     devDependencies:
       '@biomejs/biome':
         specifier: ^2
@@ -1619,8 +1619,8 @@ packages:
   process-nextick-args@2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
 
-  projen@0.98.25:
-    resolution: {integrity: sha512-LWcraC/QZ1vgVQ5WrySOtevz9BNmTxKf7iey/UkGKYUBZlhQk4mojWQHHlIpaSmLZ12ZUwGnPdjXjd7jv1TYIw==}
+  projen@0.98.26:
+    resolution: {integrity: sha512-M92WwmFwr134VpFDVwGDdpB/pcTDKs7lwbgD5fYQn/F/T4QOSaFcCbHmp/nhw0oendGb8a9p9m/zIbalVbim4w==}
     engines: {node: '>= 16.0.0'}
     hasBin: true
     peerDependencies:
@@ -3566,7 +3566,7 @@ snapshots:
 
   process-nextick-args@2.0.1: {}
 
-  projen@0.98.25(constructs@10.4.3):
+  projen@0.98.26(constructs@10.4.3):
     dependencies:
       constructs: 10.4.3
 
