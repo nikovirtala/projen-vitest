@@ -44,21 +44,21 @@
     "constructs": "^10.4.3",
     "esbuild": "^0.27.1",
     "jsii": "~5.9.3",
-    "jsii-diff": "^1.120.0",
+    "jsii-diff": "^1.121.0",
     "jsii-docgen": "^10.5.0",
-    "jsii-pacmak": "^1.120.0",
+    "jsii-pacmak": "^1.121.0",
     "jsii-rosetta": "~5.9.3",
-    "projen": "^0.98.28",
+    "projen": "^0.98.29",
     "ts-node": "^10.9.2",
     "typescript": "5.9.3",
     "vitest": "^4"
   },
   "peerDependencies": {
     "constructs": "^10.4.3",
-    "projen": "^0.98.28"
+    "projen": "^0.98.29"
   },
   "dependencies": {
-    "projen": "^0.98.28"
+    "projen": "^0.98.29"
   },
   "pnpm": {},
   "engines": {
