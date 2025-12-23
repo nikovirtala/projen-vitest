@@ -259,6 +259,11 @@ export interface VitestOptions {
     readonly config?: VitestConfigOptions;
 
     /**
+     * Extra config options to merge into the main configuration.
+     */
+    readonly extraConfig?: Record<string, unknown>;
+
+    /**
      * Vitest version.
      *
      * @default "^4"
@@ -273,6 +278,7 @@ export class Vitest extends Component {
     }
 
     private readonly configFilePath: string;
+    private readonly extraConfig: Record<string, unknown>;
     private readonly include: Set<string>;
     private readonly exclude: Set<string>;
     private readonly isolate: boolean;
@@ -324,6 +330,7 @@ export class Vitest extends Component {
         this.updateSnapshots = options.config?.updateSnapshots ?? true;
         this.printConsoleTrace = options.config?.printConsoleTrace ?? true;
         this.slowTestThreshold = options.config?.slowTestThreshold ?? 300;
+        this.extraConfig = options.extraConfig ?? {};
 
         project.addDevDeps(`vitest@${this.version}`);
         this.configureCoverageProvider(this.coverageProvider);
@@ -456,39 +463,40 @@ export class Vitest extends Component {
             defineConfigImport,
             "",
             "export default defineConfig({",
-            "  test: {",
+            "  test: ",
             ...this.renderTestOptions(),
-            "  },",
             "});",
         ];
     }
 
     private renderTestOptions(): Array<string> {
-        const lines: Array<string> = [];
+        const options = {
+            bail: this.bail,
+            coverage: {
+                enabled: this.coverageEnabled,
+                provider: this.coverageProvider,
+                reporter: this.coverageReporters,
+                reportsDirectory: this.coverageDirectory,
+            },
+            environment: this.environment,
+            exclude: Array.from(this.exclude),
+            globals: this.globals,
+            include: Array.from(this.include),
+            isolate: this.isolate,
+            passWithNoTests: this.passWithNoTests,
+            printConsoleTrace: this.printConsoleTrace,
+            pool: this.pool,
+            slowTestThreshold: this.slowTestThreshold,
+            typecheck: {
+                enabled: this.typecheckEnabled,
+                checker: this.typecheckChecker,
+                tsconfig: this.typecheckTsconfig,
+            },
+            update: this.updateSnapshots,
+            ...this.extraConfig,
+        };
 
-        lines.push(`    bail: ${this.bail},`);
-        lines.push("    coverage: {");
-        lines.push(`      enabled: ${this.coverageEnabled},`);
-        lines.push(`      provider: "${this.coverageProvider}",`);
-        lines.push(`      reporter: ${JSON.stringify(this.coverageReporters)},`);
-        lines.push(`      reportsDirectory: "${this.coverageDirectory}",`);
-        lines.push("    },");
-        lines.push(`    environment: "${this.environment}",`);
-        lines.push(`    exclude: ${JSON.stringify(Array.from(this.exclude))},`);
-        lines.push(`    globals: ${this.globals},`);
-        lines.push(`    include: ${JSON.stringify(Array.from(this.include))},`);
-        lines.push(`    isolate: ${this.isolate},`);
-        lines.push(`    passWithNoTests: ${this.passWithNoTests},`);
-        lines.push(`    printConsoleTrace: ${this.printConsoleTrace},`);
-        lines.push(`    pool: "${this.pool}",`);
-        lines.push(`    slowTestThreshold: ${this.slowTestThreshold},`);
-        lines.push("    typecheck: {");
-        lines.push(`      enabled: ${this.typecheckEnabled},`);
-        lines.push(`      checker: "${this.typecheckChecker}",`);
-        lines.push(`      tsconfig: "${this.typecheckTsconfig}",`);
-        lines.push("    },");
-        lines.push(`    update: ${this.updateSnapshots},`);
-
-        return lines;
+        const data = JSON.stringify(options, null, 2);
+        return data.split("\n").map((line) => `  ${line}`);
     }
 }
