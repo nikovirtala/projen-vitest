@@ -581,6 +581,7 @@ const vitestOptions: VitestOptions = { ... }
 | --- | --- | --- |
 | <code><a href="#@nikovirtala/projen-vitest.VitestOptions.property.config">config</a></code> | <code><a href="#@nikovirtala/projen-vitest.VitestConfigOptions">VitestConfigOptions</a></code> | Initial config options. |
 | <code><a href="#@nikovirtala/projen-vitest.VitestOptions.property.configFilePath">configFilePath</a></code> | <code>string</code> | Config file path. |
+| <code><a href="#@nikovirtala/projen-vitest.VitestOptions.property.extraConfig">extraConfig</a></code> | <code>{[ key: string ]: any}</code> | Extra config options to merge into the main configuration. |
 | <code><a href="#@nikovirtala/projen-vitest.VitestOptions.property.vitestVersion">vitestVersion</a></code> | <code>string</code> | Vitest version. |
 
 ---
@@ -607,6 +608,18 @@ public readonly configFilePath: string;
 - *Default:* "vitest.config.ts"
 
 Config file path.
+
+---
+
+##### `extraConfig`<sup>Optional</sup> <a name="extraConfig" id="@nikovirtala/projen-vitest.VitestOptions.property.extraConfig"></a>
+
+```typescript
+public readonly extraConfig: {[ key: string ]: any};
+```
+
+- *Type:* {[ key: string ]: any}
+
+Extra config options to merge into the main configuration.
 
 ---
 
