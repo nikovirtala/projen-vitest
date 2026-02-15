@@ -61,32 +61,43 @@ describe("vitest", () => {
 
         const config = snapshot["vitest.config.ts"];
         // Coverage config
-        expect(config).toContain("    coverage: {\n      enabled: true,");
-        expect(config).toContain('      provider: "v8",\n');
-        expect(config).toContain('      reporter: ["text","lcov"],\n');
-        expect(config).toContain('      reportsDirectory: "coverage",\n');
+        expect(config).toContain('    "coverage": {\n      "enabled": true,');
+        expect(config).toContain('      "provider": "v8",\n');
+        expect(config).toContain('      "reporter": [\n        "text",\n        "lcov"\n      ],\n');
+        expect(config).toContain('      "reportsDirectory": "coverage"\n');
 
         // Typecheck config
-        expect(config).toContain("    typecheck: {\n      enabled: true,");
-        expect(config).toContain('      checker: "tsc --noEmit",\n');
-        expect(config).toContain('      tsconfig: "tsconfig.dev.json",\n');
+        expect(config).toContain('    "typecheck": {\n      "enabled": true,');
+        expect(config).toContain('      "checker": "tsc --noEmit",\n');
+        expect(config).toContain('      "tsconfig": "tsconfig.dev.json"\n');
 
         // Root level config
-        expect(config).toContain("    bail: 0,\n");
-        expect(config).toContain('    environment: "node",\n');
-        expect(config).toContain("    globals: false,\n");
-        expect(config).toContain("    isolate: true,\n");
-        expect(config).toContain("    passWithNoTests: true,\n");
-        expect(config).toContain("    printConsoleTrace: true,\n");
-        expect(config).toContain('    pool: "forks",\n');
-        expect(config).toContain("    slowTestThreshold: 300,\n");
-        expect(config).toContain("    update: true,\n");
+        expect(config).toContain('    "bail": 0,\n');
+        expect(config).toContain('    "environment": "node",\n');
+        expect(config).toContain('    "globals": false,\n');
+        expect(config).toContain('    "isolate": true,\n');
+        expect(config).toContain('    "passWithNoTests": true,\n');
+        expect(config).toContain('    "printConsoleTrace": true,\n');
+        expect(config).toContain('    "pool": "forks",\n');
+        expect(config).toContain('    "slowTestThreshold": 300,\n');
+        expect(config).toContain('    "update": true\n');
 
         // Include/exclude patterns
-        expect(config).toContain(`    include: ${JSON.stringify(configDefaults.include)},\n`);
-        expect(config).toContain(
-            '    exclude: ["**/node_modules/**","**/dist/**","**/cypress/**","**/.{idea,git,cache,output,temp}/**","**/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,cypress,tsup,build,eslint,prettier}.config.*"],',
-        );
+        expect(config).toContain('    "include": [\n');
+        for (const pattern of configDefaults.include) {
+            expect(config).toContain(`      ${JSON.stringify(pattern)}`);
+        }
+        // ${JSON.stringify(configDefaults.include)},\n`);
+        expect(config).toContain('    "exclude": [\n');
+        for (const pattern of [
+            "**/node_modules/**",
+            "**/dist/**",
+            "**/cypress/**",
+            "**/.{idea,git,cache,output,temp}/**",
+            "**/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,cypress,tsup,build,eslint,prettier}.config.*",
+        ]) {
+            expect(config).toContain(`      ${JSON.stringify(pattern)}`);
+        }
     });
 
     test("custom environment", () => {
@@ -94,7 +105,7 @@ describe("vitest", () => {
         vitest.configureEnvironment(Environment.JSDOM);
 
         const snapshot = synthSnapshot(project);
-        expect(snapshot["vitest.config.ts"]).toContain('environment: "jsdom"');
+        expect(snapshot["vitest.config.ts"]).toContain('"environment": "jsdom"');
     });
 
     test("custom coverage provider", () => {
@@ -103,7 +114,7 @@ describe("vitest", () => {
 
         const snapshot = synthSnapshot(project);
 
-        expect(snapshot["vitest.config.ts"]).toContain('provider: "istanbul"');
+        expect(snapshot["vitest.config.ts"]).toContain('"provider": "istanbul"');
         expect(snapshot["package.json"].devDependencies["@vitest/coverage-istanbul"]).toBe("^4");
     });
 
@@ -112,7 +123,7 @@ describe("vitest", () => {
         vitest.configureCoverageReporters([CoverageReporter.HTML, CoverageReporter.JSON]);
 
         const snapshot = synthSnapshot(project);
-        expect(snapshot["vitest.config.ts"]).toContain('reporter: ["html","json"]');
+        expect(snapshot["vitest.config.ts"]).toContain('"reporter": [\n        "html",\n        "json"\n      ]');
     });
 
     test("custom include patterns", () => {
@@ -176,24 +187,58 @@ describe("vitest", () => {
 
         const snapshot = synthSnapshot(project);
         expect(snapshot["custom.vitest.config.ts"]).toBeDefined();
-        expect(snapshot["custom.vitest.config.ts"]).toContain('environment: "happy-dom"');
-        expect(snapshot["custom.vitest.config.ts"]).toContain("isolate: false");
-        expect(snapshot["custom.vitest.config.ts"]).toContain("passWithNoTests: false");
-        expect(snapshot["custom.vitest.config.ts"]).toContain('pool: "threads"');
-        expect(snapshot["custom.vitest.config.ts"]).toContain("globals: false");
-        expect(snapshot["custom.vitest.config.ts"]).toContain("enabled: false");
-        expect(snapshot["custom.vitest.config.ts"]).toContain('checker: "tsc"');
-        expect(snapshot["custom.vitest.config.ts"]).toContain('tsconfig: "tsconfig.custom.json"');
-        expect(snapshot["custom.vitest.config.ts"]).toContain('provider: "istanbul"');
-        expect(snapshot["custom.vitest.config.ts"]).toContain('reporter: ["html"]');
-        expect(snapshot["custom.vitest.config.ts"]).toContain('reportsDirectory: "custom-coverage"');
+        expect(snapshot["custom.vitest.config.ts"]).toContain('"environment": "happy-dom"');
+        expect(snapshot["custom.vitest.config.ts"]).toContain('"isolate": false');
+        expect(snapshot["custom.vitest.config.ts"]).toContain('"passWithNoTests": false');
+        expect(snapshot["custom.vitest.config.ts"]).toContain('"pool": "threads"');
+        expect(snapshot["custom.vitest.config.ts"]).toContain('"globals": false');
+        expect(snapshot["custom.vitest.config.ts"]).toContain('"enabled": false');
+        expect(snapshot["custom.vitest.config.ts"]).toContain('"checker": "tsc"');
+        expect(snapshot["custom.vitest.config.ts"]).toContain('"tsconfig": "tsconfig.custom.json"');
+        expect(snapshot["custom.vitest.config.ts"]).toContain('"provider": "istanbul"');
+        expect(snapshot["custom.vitest.config.ts"]).toContain('"reporter": [\n        "html"\n      ]');
+        expect(snapshot["custom.vitest.config.ts"]).toContain('"reportsDirectory": "custom-coverage"');
         expect(snapshot["custom.vitest.config.ts"]).toContain('"**/*.test.ts"');
         expect(snapshot["custom.vitest.config.ts"]).toContain('"**/*.spec.js"');
-        expect(snapshot["custom.vitest.config.ts"]).toContain("bail: 5");
-        expect(snapshot["custom.vitest.config.ts"]).toContain("update: false");
-        expect(snapshot["custom.vitest.config.ts"]).toContain("printConsoleTrace: false");
-        expect(snapshot["custom.vitest.config.ts"]).toContain("slowTestThreshold: 500");
+        expect(snapshot["custom.vitest.config.ts"]).toContain('"bail": 5');
+        expect(snapshot["custom.vitest.config.ts"]).toContain('"update": false');
+        expect(snapshot["custom.vitest.config.ts"]).toContain('"printConsoleTrace": false');
+        expect(snapshot["custom.vitest.config.ts"]).toContain('"slowTestThreshold": 500');
         expect(snapshot["package.json"].devDependencies.vitest).toBe("^4");
+    });
+
+    describe("extra custom config", () => {
+        test("injects custom config options into vitest config", () => {
+            new Vitest(project, {
+                config: {},
+                extraConfig: {
+                    expect: {
+                        requireAssertions: true,
+                    },
+                },
+            });
+
+            const snapshot = synthSnapshot(project);
+            expect(snapshot["vitest.config.ts"]).toBeDefined();
+            expect(snapshot["vitest.config.ts"]).toContain('"environment": "node"');
+            expect(snapshot["vitest.config.ts"]).toContain('"isolate": true');
+            expect(snapshot["vitest.config.ts"]).toContain('"passWithNoTests": true');
+            expect(snapshot["vitest.config.ts"]).toContain('"pool": "forks"');
+            expect(snapshot["vitest.config.ts"]).toContain('"globals": false');
+            expect(snapshot["vitest.config.ts"]).toContain('"enabled": true');
+            expect(snapshot["vitest.config.ts"]).toContain('"checker": "tsc --noEmit"');
+            expect(snapshot["vitest.config.ts"]).toContain('"tsconfig": "tsconfig.dev.json"');
+            expect(snapshot["vitest.config.ts"]).toContain('"provider": "v8"');
+            expect(snapshot["vitest.config.ts"]).toMatch(/"reporter": \[\s*"text",\s*"lcov"\s*]/);
+            expect(snapshot["vitest.config.ts"]).toContain('"reportsDirectory": "coverage"');
+            expect(snapshot["vitest.config.ts"]).toContain('"include": [\n');
+            expect(snapshot["vitest.config.ts"]).toContain('"bail": 0');
+            expect(snapshot["vitest.config.ts"]).toContain('"update": true');
+            expect(snapshot["vitest.config.ts"]).toContain('"printConsoleTrace": true');
+            expect(snapshot["vitest.config.ts"]).toContain('"slowTestThreshold": 300');
+            expect(snapshot["vitest.config.ts"]).toContain('"requireAssertions": true');
+            expect(snapshot["package.json"].devDependencies.vitest).toBe("^4");
+        });
     });
 
     describe("globals", () => {
