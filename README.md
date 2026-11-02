@@ -1,5 +1,18 @@
 # projen vitest
 
+> [!WARNING]
+> **This package is deprecated** and won't get new features or fixes. Use [`@nikovirtala/projen-constructs`](https://github.com/nikovirtala/projen-constructs) instead.
+>
+> Replace the dev dependency `@nikovirtala/projen-vitest` with `@nikovirtala/projen-constructs`, then change the import:
+>
+> ```typescript
+> import { Vitest } from "@nikovirtala/projen-constructs";
+> ```
+>
+> `vitest.config.ts` then imports `defineConfig` from `@nikovirtala/projen-constructs/lib/vitest-define-config`, which projen rewrites for you. The component also gained `extraTestConfig` and `extraConfig` for Vitest settings it doesn't cover (#159, #210).
+>
+> See the [migration guide](https://github.com/nikovirtala/projen-constructs#migrating-from-the-standalone-packages) for the steps and the differences to expect.
+
 [Vitest](https://vitest.dev) component for [projen](https://projen.io) [Node.js](https://nodejs.org/en) projects.
 
 ## example usage
